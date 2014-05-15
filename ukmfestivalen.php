@@ -17,7 +17,7 @@ if(is_admin()) {
 		add_action('UKM_admin_menu', 'UKMfestivalen_menu');
 		add_action('wp_ajax_UKMfestivalen_ajax', 'UKMfestivalen_ajax');
 	}
-	define('PLUGIN_DIR_PATH', dirname(__FILE__).'/');
+	define('PLUGIN_DIR_PATH_UKMFESTIVALEN', dirname(__FILE__).'/');
 }
 
 /*

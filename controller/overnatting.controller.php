@@ -1,5 +1,5 @@
 <?php
-require_once( PLUGIN_DIR_PATH.'../UKMvideresending_festival/class/leder.class.php' );
+require_once( PLUGIN_DIR_PATH_UKMFESTIVALEN.'../UKMvideresending_festival/class/leder.class.php' );
 require_once( 'UKM/inc/excel.inc.php');
 
 $m = new monstring( get_option('pl_id') );
