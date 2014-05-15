@@ -1,8 +1,32 @@
 <h1>Lederovernattinger</h1>
-<h2>Rediger eller legg til ledere og lederovernattinger</h2>
 
-<a href="/testfylke/wp-admin/admin.php?page=UKMvideresending_festival&action=ledere">UKM Norge</a>
+<p class="lead">Det er 2 typer ledere: fylkesledere og ledere for UKM Norge</p>
 
-<p class="lead">Last ned excel-ark fra denne siden</p>
+<div class="UKMwidth">
+	<div class="col-xs-12 col-sm-6">
+		<div class="well" style="background:#fff;">
+			<h3>Fylkesledere</h3>
+			<p>Alle endringer må skje fra fylkessiden</p>
+			
+			<label for="gotofylke">Velg fylke</label><br />
+			<select id="gotofylke">
+			{% for fylke in fylker %}
+				<option value="http:{{fylke.link}}wp-admin/admin.php?page=UKMvideresending_festival&action=ledere">{{fylke.name}}</option>
+			{% endfor %}
+			</select>
+			<a href="#" id="gotofylkebutton" class="btn btn-primary">administrer ledere</a>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-6">
+		<div class="well" style="background:#fff;">
+			<h3>UKM Norge</h3>
+			<p>Booking av enkelt- og dobbeltrom for alt av UKM Norges personell</p>
 
-<a href="{{excel_hotell_norge}}">Hotellovernattinger</a>
+			<a href="?page=UKMFovernatting&action=grupper" class="btn btn-primary">Administrer UKM Norges overnattinger</a>
+		</div>
+	</div>
+</div>
+<div class="clearfix"></div>
+
+<h2>Last ned bestillinger</h2>
+<a href="{{excel_hotell_norge}}">Excel-ark for bestilling av hotell</a>

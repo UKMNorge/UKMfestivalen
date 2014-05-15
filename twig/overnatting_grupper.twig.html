@@ -1,0 +1,42 @@
+<h2>Administrer UKM Norges overnattinger</h2>
+
+<div class="UKMwidth">
+	<div class="well">
+		<h3 style="margin-top: 0px;">Legg til ny gruppe</h3>
+		<p>Typiske grupper er "styret", "administrasjonen", "nettredaksjonen" osv</p>
+			<form class="form-inline" role="form">
+				<div class="form-group">
+					<label class="sr-only" for="gruppe_navn">Email address</label>
+					<input type="text" class="form-control" id="gruppe_navn" placeholder="Skriv navn på gruppe">
+				</div>
+				<button type="button" class="btn btn-default" data-class="btn-default" data-text="Opprett" id="gruppe_opprett">Opprett</button>
+			</form>
+
+	</div>	
+	
+	<div class="">
+		<h3>Jobb med eksisterende gruppe</h3>
+		<p>Endre navn, legg til hotellrom og personer</p>
+		<table class="table table-striped" id="grupper">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Gruppe</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for gruppe in grupper.objects %}
+					{% embed "js/overnatting_gruppe.rad.twig.html" %}{% endembed %}
+				{% else %}
+					<tr>
+						<td></td>
+						<td class="alert-danger">Det er ikke lagt til noen grupper enda!</td>
+						<td></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>

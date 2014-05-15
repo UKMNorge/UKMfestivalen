@@ -1,0 +1,78 @@
+<h2>Overnattinger for {{gruppe.navn}}</h2>
+<div class="UKMwidth">
+	<div class="well">
+		<h3 style="margin-top: 0px;">Legg til person</h3>
+		<form class="form" role="form" id="person_leggtil">
+			<input type="hidden" value="{{gruppe.id}}" id="gruppe" name="gruppe" />
+			<div class="form-group">
+				<label>Navn</label>
+				<input type="text" name="navn" id="navn" class="form-control" value="" placeholder="" />
+				<p>Fornavn og etternavn</p>
+			</div>
+			<div class="form-group">
+				<label>Mobil</label>
+				<input type="phone" name="mobil" id="mobil" class="form-control" value="" placeholder="" />
+			</div>
+			<div class="form-group">
+				<label>E-postadresse</label>
+				<input type="email" name="epost" id="epost" class="form-control" value="" placeholder="" />
+			</div>
+
+			<div class="form-group">
+				<label>Type rom</label>
+				<br />
+				<label for="rom_enkel">
+					<input type="radio" name="romtype" id="rom_enkel" class="form-control" value="enkel" />
+					Enkeltrom
+				</label>
+
+				<label for="rom_dobbel">
+					<input type="radio" name="romtype" id="rom_dobbel" class="form-control" value="dobbel" />
+					Dobbeltrom
+				</label>
+			</div>
+
+
+			<div class="form-group" id="dobbeltrom_deling" style="display:none">
+				<label>Velg dobbeltrom</label>
+				<br />
+				<select id="dobbeltrom_med_hvem">
+					<option value="nytt">Opprett et nytt dobbeltrom</option>
+					<optgroup label="eller sammen med">
+						<option value="false" disabled="disabled">Vennligst vent, laster dobbeltrom med ledig kapasitet...</option>
+					</optgroup>
+				</select>
+			</div>
+
+			<button type="button" class="btn btn-default submit" data-class="btn-default" data-text="Legg til person" id="person_leggtil_knapp">Legg til person</button>
+		</form>
+	</div>	
+	
+	<div class="">
+		<h3>Personer og rom i gruppen</h3>
+		<p>Endre navn, legg til hotellrom og personer</p>
+		<table class="table table-striped" id="personer">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Navn</th>
+					<th>Mobil</th>
+					<th>E-post</th>
+					<th>Rom</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for person in gruppe.personer.objects %}
+					{% embed "js/overnatting_person.rad.twig.html" %}{% endembed %}
+				{% else %}
+					<tr>
+						<td></td>
+						<td class="alert-danger">Det er ikke lagt til noen personer enda!</td>
+						<td></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -20,18 +20,15 @@ if(is_admin()) {
 	define('PLUGIN_DIR_PATH_UKMFESTIVALEN', dirname(__FILE__).'/');
 }
 
-/*
 function UKMfestivalen_ajax() {
-	require_once('controller/layout.controller.php');
 	require_once('ajax/'. $_POST['subaction'] .'.ajax.php');
 	die();
 }
-*/
 
 ## CREATE A MENU
 function UKMfestivalen_menu() {
 	global $UKMN;
-	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/star-menu.png',40);
+	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',40);
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
 }
 
@@ -42,8 +39,8 @@ function UKMfestivalen_script() {
 
 	wp_enqueue_script('WPbootstrap3_js');
 	wp_enqueue_style('WPbootstrap3_css');
-	wp_enqueue_style( 'UKMfestivalen_style', plugin_dir_url( _FILE_ ) .'UKMfestivalen.css');
-	wp_enqueue_script( 'UKMfestivalen_script', plugin_dir_url( _FILE_ ) .'UKMfestivalen.js');
+	wp_enqueue_style( 'UKMfestivalen_style', plugin_dir_url( _FILE_ ) .'UKMfestivalen/UKMfestivalen.css');
+	wp_enqueue_script( 'UKMfestivalen_script', plugin_dir_url( _FILE_ ) .'UKMfestivalen/UKMfestivalen.js');
 	
 }
 
@@ -52,7 +49,7 @@ function UKMfestivalen($VIEW) {
 	$TWIG = array();	
 
 	if( isset( $_GET['action'] ) ) {
-		$VIEW.'_'.$_GET['action'];
+		$VIEW = $VIEW.'_'.$_GET['action'];
 	}
 	require_once('controller/'. $VIEW .'.controller.php');
 	
@@ -85,6 +82,7 @@ function UKMFovernatting() {
 
 
 
+/*
 ## HOOK MENU AND SCRIPTS
 if(is_admin()) {
 	if(get_option('site_type')!=='land')
@@ -103,8 +101,8 @@ function UKMFestivalen_old_scriptsandstyles() {
 	
 	wp_enqueue_script('jqueryGoogleUI', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js');
 	
-/* 	wp_register_script('jquery-ui-effects-core', 'http://ukm.no/wp-includes/js/jquery/ui/jquery.effects.core.min.js');
-	wp_register_script('shake', 'http://ukm.no/wp-includes/js/jquery/ui/jquery.effects.shake.min.js'); */
+// 	wp_register_script('jquery-ui-effects-core', 'http://ukm.no/wp-includes/js/jquery/ui/jquery.effects.core.min.js');
+//	wp_register_script('shake', 'http://ukm.no/wp-includes/js/jquery/ui/jquery.effects.shake.min.js'); 
 	wp_register_script('zoombox_js','/wp-content/plugins/UKMvisitorpages/zoombox/zoombox.js');
 	wp_register_script('UKMFestivalen_js', WP_PLUGIN_URL .'/UKMVideresending/videresending.js');
 	wp_register_script('UKMNorge_JQprint', WP_PLUGIN_URL .'/UKMNorge/js/jquery.print.js');
@@ -210,4 +208,5 @@ function UKMF_workshops() {
 	require_once('workshops.php');
 	UKMF_workshops_gui();
 }
+*/
 ?>
