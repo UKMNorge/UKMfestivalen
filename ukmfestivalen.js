@@ -1,13 +1,43 @@
 /* PERSONER OG ROM-ADMINISTRASJON */
+	jQuery(document).on('reset_person_leggtil', function(){
+		var data = {action: 'UKMfestivalen_ajax',
+					subaction: 'overnatting_person_resetform'
+					};
+		jQuery.post(ajaxurl, data, function(response){
+			jQuery('#person_leggtil').html( twigJSovernattingperson_form.render( jQuery.parseJSON(response) ) );
+		});
+	});
+	
+	jQuery(document).on('click', '.resetPersonLeggtil', function(e){
+		e.preventDefault();
+		jQuery(document).trigger('reset_person_leggtil');
+	});
+	
+	jQuery(document).on('click', 'tr.person a', function(e) {
+	 e.preventDefault();
+	 data = {action: 'UKMfestivalen_ajax',
+	         subaction: 'overnatting_person_load',
+	         ID: jQuery(this).parents('tr').attr('data-id')
+	         };
+	 jQuery.post(ajaxurl, data, function(response) {
+		jQuery('#person_leggtil').html( twigJSovernattingperson_form.render( jQuery.parseJSON(response) ) );
+		jQuery(document).trigger('showHideDobbeltrom');
+	
+	 });
+	});
+
 	jQuery(document).on('click', '#person_leggtil button.submit', function(){
 		btn_ajax_do( jQuery(this) );
 		var data = {
 			action: 'UKMfestivalen_ajax',
 			subaction: 'overnatting_person_leggtil', 
-			gruppe: jQuery('#person_leggtil #gruppe').val(),
+			gruppe: jQuery('#gruppe').val(),
+			person: jQuery('#person_leggtil #person').val(),
 			navn: jQuery('#person_leggtil #navn').val(),
 			mobil: jQuery('#person_leggtil #mobil').val(),
 			epost: jQuery('#person_leggtil #epost').val(),
+			ankomst: jQuery('#person_leggtil #ankomst').val(),
+			avreise: jQuery('#person_leggtil #avreise').val(),
 			romtype: jQuery('#person_leggtil input[name="romtype"]:checked').val(),
 			dobbeltromID: jQuery('#person_leggtil #dobbeltrom_med_hvem').val()
 		};
@@ -17,8 +47,12 @@
 			
 			if( data.success ) {
 				btn_ajax_success( jQuery('#person_leggtil_knapp') );
+				person = jQuery('#personer tbody').find('tr#person_'+data.person.ID);
+				if( person.length != 0 ) {
+					person.remove();
+				}	
 				jQuery('#personer tbody').append( twigJSovernattingperson_rad.render( data ) );
-				jQuery('#person_leggtil').each(function(){this.reset()});
+				jQuery(document).trigger('reset_person_leggtil');
 			} else {
 				btn_ajax_error( jQuery('#person_leggtil_knapp') );
 			}
@@ -27,6 +61,10 @@
 	
 	
 	jQuery(document).on('click focus change','#person_leggtil input[name="romtype"]', function(){
+		jQuery(document).trigger('showHideDobbeltrom');
+	});
+	
+	jQuery(document).on('showHideDobbeltrom', function(){
 		if( jQuery('#person_leggtil input[name="romtype"]:checked').val() == 'dobbel' ) {
 			jQuery(document).trigger('dobbeltrom_vis');
 			jQuery(document).trigger('dobbeltrom_last_ledig_kapasitet');
@@ -35,7 +73,6 @@
 		}
 
 	});
-	
 	
 	jQuery(document).on('dobbeltrom_vis', function(){
 		jQuery('#dobbeltrom_deling').slideDown();
@@ -46,7 +83,8 @@
 	jQuery(document).on('dobbeltrom_last_ledig_kapasitet', function(){
 		var data = {
 			action: 'UKMfestivalen_ajax',
-			subaction: 'overnatting_ledig_dobbeltrom'
+			subaction: 'overnatting_ledig_dobbeltrom',
+			person: jQuery('#person_leggtil #person').val()
 		};
 		
 		jQuery.post(ajaxurl, data, function(response) {
@@ -89,6 +127,12 @@
 		alert('Kontakt Marius');
 	});
 	
+/* ADMINISTRER LEDERE FRA FYLKENE */
+jQuery(document).on('click', '#gotofylkebutton', function(){
+	var target = jQuery('#gotofylke').val();
+	jQuery(this).attr('href', target);
+	return true;
+});
 	
 // BUTTON STATES FOR AJAX
 	function btn_ajax_do( btn, text ) {

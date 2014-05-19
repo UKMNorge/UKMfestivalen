@@ -8,7 +8,9 @@ class person_overnatting extends simple_orm {
 							  'navn'=>'string',
 							  'mobil'=>'int',
 							  'epost'=>'string',
-							  'gruppe'=>'int'
+							  'gruppe'=>'int',
+							  'ankomst'=>'string',
+							  'avreise'=>'string'
 							  );
 	var $table_name = 'ukm_festival_overnatting_person';
 	var $table_idcol = 'id';

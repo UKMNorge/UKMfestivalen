@@ -1,0 +1,110 @@
+<h3 style="margin-top: 0px;">
+{% if person.ID == 'ny' %}
+	Legg til person
+{% else %}
+	Rediger {{person.navn}}
+{% endif %}
+</h3>
+
+<input type="hidden" value="{{person.ID}}" id="person" name="person" />
+<div class="form-group">
+	<label>Navn</label>
+	<input type="text" name="navn" id="navn" class="form-control" value="{{person.navn}}" placeholder="" />
+	<p>Fornavn og etternavn</p>
+</div>
+<div class="form-group">
+	<label>Mobil</label>
+	<input type="phone" name="mobil" id="mobil" class="form-control" value="{{person.mobil}}" placeholder="" />
+</div>
+<div class="form-group">
+	<label>E-postadresse</label>
+	<input type="email" name="epost" id="epost" class="form-control" value="{{person.epost}}" placeholder="" />
+</div>
+
+
+<div class="col-xs-12 col-sm-6" id="">
+	<label>Ankomst</label>
+	<br />
+	<select id="ankomst" name="ankomst">
+		<optgroup label="Tilknytningsdøgn i forkant">
+		{% for natt in netter.for|reverse %}
+			<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning -{{loop.revindex}})</option>
+		{% endfor %}
+		</optgroup>
+		<optgroup label="{{monstring.navn}}">
+			{% for natt in netter.under %}
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>
+					{{natt.timestamp|dato('j.n l')}}
+					({% if loop.first %}første dag{% elseif loop.last %}siste dag{% else %}dag {{loop.index }}{% endif %})
+				</option>
+			{% endfor %}
+		</optgroup>
+		<optgroup label="Tilknytningsdøgn i etterkant">
+			{% for natt in netter.etter %}
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning +{{loop.index}})</option>
+			{% endfor %}
+		</optgroup>
+	</select>
+</div>
+
+<div class="col-xs-12 col-sm-6" id="">
+	<label>Avreise</label>
+	<br />
+	<select id="avreise" name="avreise">
+		<optgroup label="Tilknytningsdøgn i forkant">
+		{% for natt in netter.for|reverse %}
+			<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning -{{loop.revindex}})</option>
+		{% endfor %}
+		</optgroup>
+		<optgroup label="{{monstring.navn}}">
+			{% for natt in netter.under %}
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>
+					{{natt.timestamp|dato('j.n l')}}
+					({% if loop.first %}første dag{% elseif loop.last %}siste dag{% else %}dag {{loop.index }}{% endif %})
+				</option>
+			{% endfor %}
+		</optgroup>
+		<optgroup label="Tilknytningsdøgn i etterkant">
+			{% for natt in netter.etter %}
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning +{{loop.index}})</option>
+			{% endfor %}
+		</optgroup>
+	</select>
+</div>
+
+<div class="clearfix"></div>
+<p>&nbsp;</p>
+
+
+<div class="form-group">
+	<label>Type rom</label>
+	<br />
+	<label for="rom_enkel">
+		<input type="radio" name="romtype" id="rom_enkel" class="form-control" value="enkel" {{person.romtype == 'enkelt' ? 'checked="checked"' : '' }} />
+		Enkeltrom
+	</label>
+
+	<label for="rom_dobbel">
+		<input type="radio" name="romtype" id="rom_dobbel" class="form-control" value="dobbel" {{person.romtype == 'dobbelt' ? 'checked="checked"' : '' }} />
+		Dobbeltrom
+	</label>
+</div>
+
+
+<div class="form-group" id="dobbeltrom_deling" style="display:none">
+	<label>Velg dobbeltrom</label>
+	<br />
+	<select id="dobbeltrom_med_hvem">
+		<option value="nytt">Opprett et nytt dobbeltrom</option>
+		<optgroup label="eller sammen med">
+			<option value="false" disabled="disabled">Vennligst vent, laster dobbeltrom med ledig kapasitet...</option>
+		</optgroup>
+	</select>
+</div>
+
+{% if person.ID == 'ny' %}
+<button type="button" class="btn btn-default submit" data-class="btn-default" data-text="Legg til person" id="person_leggtil_knapp">Legg til person</button>
+{% else %}
+<button type="button" class="btn btn-default submit" data-class="btn-default" data-text="Lagre person" id="person_leggtil_knapp">Lagre {{person.navn}}</button>
+<a href="#" class="resetPersonLeggtil">avbryt</a>
+{% endif %}

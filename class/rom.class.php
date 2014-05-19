@@ -37,6 +37,10 @@ class rom extends simple_orm {
 			return false;
 		}
 		
+		// Unrelate before relate
+		$sqldel = new SQLdel($this->table_relations, array('person_id'=>$person->ID));
+		$sqldel->run();
+		
 		$sql = new SQLins($this->table_relations);
 		$sql->add('person_id', $person->ID);
 		$sql->add('rom_id', $this->ID);

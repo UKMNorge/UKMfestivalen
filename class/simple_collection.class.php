@@ -20,6 +20,10 @@ abstract class simple_collection {
 		$this->objects = null;
 	}
 	
+	public function count() {
+		return sizeof( $this->objects );
+	}
+	
 	function load() {
 		$ids = new SQL("SELECT `#id`
 						FROM `#table`
