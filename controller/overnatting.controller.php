@@ -95,6 +95,7 @@ require_once( 'UKM/inc/excel.inc.php');
 	}
 
 	$excelArk = 0;
+	if( is_array( $ressurspersoner ))
 	foreach( $ressurspersoner as $gruppe => $personer ) {
 		$excelArk++;
 		$navn = substr($gruppe, 0, 16);
