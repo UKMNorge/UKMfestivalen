@@ -32,7 +32,7 @@
 				{% for person in gruppe.personer.objects %}
 					{% embed "js/overnatting_person.rad.twig.html" %}{% endembed %}
 				{% else %}
-					<tr>
+					<tr class="noonehere">
 						<td></td>
 						<td class="alert-danger">Det er ikke lagt til noen personer enda!</td>
 						<td></td>

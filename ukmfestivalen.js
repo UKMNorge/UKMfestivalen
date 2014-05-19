@@ -51,6 +51,9 @@
 				if( person.length != 0 ) {
 					person.remove();
 				}	
+				jQuery('#personer tr.noonehere').each(function(){
+					jQuery(this).remove();
+				});
 				jQuery('#personer tbody').append( twigJSovernattingperson_rad.render( data ) );
 				jQuery(document).trigger('reset_person_leggtil');
 			} else {
