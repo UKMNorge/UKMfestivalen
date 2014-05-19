@@ -25,6 +25,18 @@ require_once( 'UKM/inc/excel.inc.php');
 	$m = new monstring( get_option('pl_id') );
 	$netter = $m->netter();
 
+	require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'controller/overnatting_netter.controller.php');
+	krsort($TWIG['netter']['for']);
+	$alle_netter = array_merge( $TWIG['netter']['for'], $TWIG['netter']['under'], $TWIG['netter']['etter'] );
+	$count_enkel = array();
+	$count_dobbel = array();
+	foreach( $alle_netter as $num => $data ) {
+		$count_enkel['ledere'][ $data->dag.'.'.$data->mnd ] = 0;
+		$count_dobbel['ledere'][$data->dag.'.'.$data->mnd ] = 0;
+		$count_enkel['total'][ $data->dag.'.'.$data->mnd ] = 0;
+		$count_dobbel['total'][$data->dag.'.'.$data->mnd ] = 0;
+	}
+
 // LAST INN INFO OM LEDERE
 	$ledere = new SQL("SELECT `l_id`,`sort`.`pl_name`
 						FROM `smartukm_videresending_ledere_ny` AS `leder`
@@ -68,13 +80,14 @@ require_once( 'UKM/inc/excel.inc.php');
 		foreach( $netter as $num => $data ) {
 			$pa_hotell = $leder->natt[ $data->dag.'_'.$data->mnd ]->sted == 'hotell';
 			excell(i2a($col+$num).$rad, $pa_hotell ? 'x' : '-');
+			if( $pa_hotell ) {
+				$count_enkel['ledere'][ $data->dag.'.'.$data->mnd ] ++;
+				$count_enkel['total'][ $data->dag.'.'.$data->mnd ] ++;
+			}
 		}
 	}
 
 // RESSURSER FRA UKM NORGE
-	$m = new monstring( get_option('pl_id') );
-	require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'controller/overnatting_netter.controller.php');
-
 	$sql = new SQL("SELECT `p`.`navn`,
 						   `p`.`mobil`,
 						   `p`.`epost`,
@@ -97,6 +110,12 @@ require_once( 'UKM/inc/excel.inc.php');
 	$excelArk = 0;
 	if( is_array( $ressurspersoner ))
 	foreach( $ressurspersoner as $gruppe => $personer ) {
+
+		foreach( $alle_netter as $num => $data ) {
+			$count_enkel[$gruppe][ $data->dag.'.'.$data->mnd ] = 0;
+			$count_dobbel[$gruppe][$data->dag.'.'.$data->mnd ] = 0;
+		}
+
 		$excelArk++;
 		$navn = substr($gruppe, 0, 16);
 		$objPHPExcel->createSheet($excelArk);
@@ -110,9 +129,8 @@ require_once( 'UKM/inc/excel.inc.php');
 		excell('E1', 'E-post', 'bold');
 		$col = 6;
 		$rad = 1;
-		krsort($TWIG['netter']['for']);
-		$netter = array_merge( $TWIG['netter']['for'], $TWIG['netter']['under'], $TWIG['netter']['etter'] );
-		foreach( $netter as $num => $data ) {
+
+		foreach( $alle_netter as $num => $data ) {
 			excell(i2a($col+$num).$rad, date('D d.m',$data->timestamp),'bold');
 		}
 		$rad = 1;
@@ -126,15 +144,27 @@ require_once( 'UKM/inc/excel.inc.php');
 			$start = $p['ankomst'];
 			$stop = $p['avreise'];
 			$selector = ' - ';
-			foreach( $netter as $num => $data ) {
+			foreach( $alle_netter as $num => $data ) {
 				if( $start == date('d.m',$data->timestamp) )
 					$text = 'x';
 				if( $stop == date('d.m',$data->timestamp) ) 
 					$text = '-';
+				if( $text == 'x' && $p['romtype'] == 'enkelt') {
+					$count_enkel[$gruppe][ $data->dag.'.'.$data->mnd ]++;
+					$count_enkel['total'][ $data->dag.'.'.$data->mnd ]++;
+				}
+				if( $text == 'x' && $p['romtype'] == 'dobbelt') {
+					$count_dobbel[$gruppe][ $data->dag.'.'.$data->mnd ]++;
+					$count_dobbel['total'][ $data->dag.'.'.$data->mnd ]++;
+				}
+					
 				excell(i2a($col+$num).$rad, $text);
 			}
 		}
 	}
 	
-	
+	$TWIG['alle_netter'] = $alle_netter;
+	$TWIG['count']['enkel'] = $count_enkel;
+	$TWIG['count']['dobbel'] = $count_dobbel;
+		
 	$TWIG['excel_hotell_norge'] = exWrite($objPHPExcel,'UKMF_Hotell_UKM_Norge');

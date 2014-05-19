@@ -30,6 +30,73 @@
 </div>
 <div class="clearfix"></div>
 
+<h3>Status enkeltrom</h3>
+<div class="UKMwidth">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Gruppe</th>
+				{% for natt in alle_netter %}
+					<th>{{natt.timestamp|dato('d.m')}}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for gruppe,netter in count.enkel if gruppe != 'total' %} 
+				<tr>
+					<td>{{gruppe|capitalize}}</td>
+					{% for natt in alle_netter %} 
+						<td>{{count.enkel[gruppe][ natt.dag~'.'~natt.mnd ]}}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			{% for gruppe,netter in count.enkel if gruppe == 'total' %} 
+				<tr>
+					<th>{{gruppe|capitalize}}</th>
+					{% for natt in alle_netter %} 
+						<th>{{count.enkel[gruppe][ natt.dag~'.'~natt.mnd ]}}</th>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tfoot>
+	</table>
+</div>
+
+<h3>Status dobbeltrom</h3>
+<div class="UKMwidth">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Gruppe</th>
+				{% for natt in alle_netter %}
+					<th>{{natt.timestamp|dato('d.m')}}</th>
+				{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for gruppe,netter in count.enkel if gruppe != 'total' %} 
+				<tr>
+					<td>{{gruppe|capitalize}}</td>
+					{% for natt in alle_netter %} 
+						<td>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]}}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			{% for gruppe,netter in count.enkel if gruppe == 'total' %} 
+				<tr>
+					<th>{{gruppe|capitalize}}</th>
+					{% for natt in alle_netter %} 
+						<th>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]}}</th>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tfoot>
+	</table>
+</div>
 <h3>Last ned hotellister</h3>
 <p class="lead">Når alt er klart laster du her ned excel-dokumentet som sendes til hotellet for booking</p>
 <p>Du kan laste ned excel-arket så mange ganger du ønsker (for å se status underveis e.l.)</p>
