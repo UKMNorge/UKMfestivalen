@@ -176,7 +176,8 @@ require_once( 'UKM/inc/excel.inc.php');
 		$objPHPExcel->setActiveSheetIndex($index);
 
 		exSheetName($natt->dag.'.'.$natt->mnd);
-		$rad = 1;
+		excell('A1:D1', 'Ledere i deltakerovernattingen '. $natt->dag .'.'. $natt->mnd);
+		$rad = 2;
 		excell('A'.$rad, 'Fylke','bold');
 		excell('B'.$rad, 'Navn','bold');
 		excell('C'.$rad, 'Mobil','bold');
@@ -193,7 +194,7 @@ require_once( 'UKM/inc/excel.inc.php');
 		$res = $sql->run();
 		while( $r = mysql_fetch_assoc( $res ) ) {
 			$rad++;
-			excell('A'.$rad, $r['pl_name']);
+			excell('A'.$rad, utf8_encode($r['pl_name']));
 			excell('B'.$rad, $r['l_navn']);
 			excell('C'.$rad, $r['l_mobilnummer']);
 			excell('D'.$rad, $r['l_epost']);
