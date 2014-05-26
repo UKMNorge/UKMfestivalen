@@ -51,7 +51,7 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 	excell('C'.$rad, (string) $r['reise_inn_mate']);
 	excell('D'.$rad, 0);
 	excell('E'.$rad, (string) $r['reise_inn_sted']);
-	excell('F'.$rad, (string) $r['reise_inn_tidspunkt']);
+	excell('F'.$rad, (string) $r['reise_inn_dato']);
 	excell('G'.$rad, (string) $r['overnatting_spektrumdeltakere']);
 	excell('H'.$rad, (string) $r['reise_inn_samtidig']);
 	excell('I'.$rad, (string) $r['reise_inn_samtidig_nei']);
@@ -61,7 +61,7 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 	excell('B'.$rad, (string) $r['pl_name']);
 	excell('C'.$rad, (string) $r['reise_ut_mate']);
 	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) $r['reise_ut_tidspunkt']);
+	excell('E'.$rad, (string) $r['reise_ut_datp']);
 	excell('F'.$rad, (string) $r['overnatting_spektrumdeltakere']);
 	excell('G'.$rad, (string) $r['reise_ut_samtidig']);
 	excell('H'.$rad, (string) $r['reise_ut_samtidig_nei']);
