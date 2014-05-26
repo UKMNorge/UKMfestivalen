@@ -163,8 +163,45 @@ require_once( 'UKM/inc/excel.inc.php');
 		}
 	}
 	
+	$TWIG['excel_hotell_norge'] = exWrite($objPHPExcel,'UKMF_Hotell_UKM_Norge');	
+	
+	/// LEDERE I SPEKTRUM
+	global $objPHPExcel;
+	$objPHPExcel = null;
+	exInit('Deltakerovernatting ledere UKM Norge');
+	
+	$index = 0;
+	foreach( array_reverse($netter) as $natt ) {
+		$objPHPExcel->createSheet($index);
+		$objPHPExcel->setActiveSheetIndex($index);
+
+		exSheetName($natt->dag.'.'.$natt->mnd);
+		$rad = 1;
+		excell('A'.$rad, 'Fylke','bold');
+		excell('B'.$rad, 'Navn','bold');
+		excell('C'.$rad, 'Mobil','bold');
+		excell('D'.$rad, 'E-post','bold');
+
+		$sql = new SQL("SELECT * FROM `smartukm_videresending_ledere_natt` AS `natt`
+					JOIN `smartukm_videresending_ledere_ny` AS `leder` ON (`leder`.`l_id` = `natt`.`l_id`)
+					JOIN `smartukm_place` AS `place` ON (`place`.`pl_id` = `leder`.`pl_id_from`)
+					WHERE `sted` = 'deltakere'
+					AND `dato` = '#dag_#mnd'
+					AND `pl_id_to` = '#monstring'
+					ORDER BY `place`.`pl_name` ASC, `leder`.`l_navn` ASC",
+					array('dag' => $natt->dag, 'mnd' => $natt->mnd, 'monstring' => get_option('pl_id')));
+		$res = $sql->run();
+		while( $r = mysql_fetch_assoc( $res ) ) {
+			$rad++;
+			excell('A'.$rad, $r['pl_name']);
+			excell('B'.$rad, $r['l_navn']);
+			excell('C'.$rad, $r['l_mobilnummer']);
+			excell('D'.$rad, $r['l_epost']);
+		}
+	}
+	$TWIG['excel_deltakerovernatting'] = exWrite($objPHPExcel,'UKMF_Deltakerovernatting_UKM_Norge');	
+	
 	$TWIG['alle_netter'] = $alle_netter;
 	$TWIG['count']['enkel'] = $count_enkel;
 	$TWIG['count']['dobbel'] = $count_dobbel;
 		
-	$TWIG['excel_hotell_norge'] = exWrite($objPHPExcel,'UKMF_Hotell_UKM_Norge');
