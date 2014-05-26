@@ -6,7 +6,7 @@ $sql = new SQL("SELECT *
 				JOIN `smartukm_place` AS `place` ON (`info`.`pl_id_from` = `place`.`pl_id`)
 				WHERE `info`.`pl_id` = '#place'
 				ORDER BY `reise_inn_mate`, `reise_inn_dato` ASC",
-				array('place' => get_option('pl_id') ));
+				array('place' => get_option('pl_id')) );
 $res = $sql->run();
 
 global $objPHPExcel;
@@ -46,25 +46,25 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 	$objPHPExcel->setActiveSheetIndex(0);
 
 	$rad++;
-	excell('A'.$rad, (string) utf8_encode($r['reise_inn_tidspunkt']));
-	excell('B'.$rad, (string) utf8_encode($r['pl_name']));
-	excell('C'.$rad, (string) utf8_encode($r['reise_inn_mate']));
+	excell('A'.$rad, (string) $r['reise_inn_tidspunkt']);
+	excell('B'.$rad, (string) $r['pl_name']);
+	excell('C'.$rad, (string) $r['reise_inn_mate']);
 	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) utf8_encode($r['reise_inn_sted']));
-	excell('F'.$rad, (string) utf8_encode($r['reise_inn_tidspunkt']));
-	excell('G'.$rad, (string) utf8_encode($r['overnatting_spektrumdeltakere']));
-	excell('H'.$rad, (string) utf8_encode($r['reise_inn_samtidig']));
-	excell('I'.$rad, (string) utf8_encode($r['reise_inn_samtidig_nei']));
+	excell('E'.$rad, (string) $r['reise_inn_sted']);
+	excell('F'.$rad, (string) $r['reise_inn_tidspunkt']);
+	excell('G'.$rad, (string) $r['overnatting_spektrumdeltakere']);
+	excell('H'.$rad, (string) $r['reise_inn_samtidig']);
+	excell('I'.$rad, (string) $r['reise_inn_samtidig_nei']);
 	
 	$objPHPExcel->setActiveSheetIndex(1);
-	excell('A'.$rad, (string) utf8_encode($r['reise_ut_tidspunkt']));
-	excell('B'.$rad, (string) utf8_encode($r['pl_name']));
-	excell('C'.$rad, (string) utf8_encode($r['reise_ut_mate']));
+	excell('A'.$rad, (string) $r['reise_ut_tidspunkt']);
+	excell('B'.$rad, (string) $r['pl_name']);
+	excell('C'.$rad, (string) $r['reise_ut_mate']);
 	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) utf8_encode($r['reise_ut_tidspunkt']));
-	excell('F'.$rad, (string) utf8_encode($r['overnatting_spektrumdeltakere']));
-	excell('G'.$rad, (string) utf8_encode($r['reise_ut_samtidig']));
-	excell('H'.$rad, (string) utf8_encode($r['reise_ut_samtidig_nei']));
+	excell('E'.$rad, (string) $r['reise_ut_tidspunkt']);
+	excell('F'.$rad, (string) $r['overnatting_spektrumdeltakere']);
+	excell('G'.$rad, (string) $r['reise_ut_samtidig']);
+	excell('H'.$rad, (string) $r['reise_ut_samtidig_nei']);
 }
 
 $TWIG['excel_reise'] = exWrite($objPHPExcel,'UKMF_Reise_UKMFestivalen');
