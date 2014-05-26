@@ -16,7 +16,7 @@ exSheetName('Ankomst');
 
 $objPHPExcel->createSheet(1);
 $objPHPExcel->setActiveSheetIndex(1);
-exSheetName($navn,'f69a9b');
+exSheetName('Avreise','f69a9b');
 
 
 $objPHPExcel->setActiveSheetIndex(0);
