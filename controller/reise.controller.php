@@ -47,22 +47,22 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 
 	$rad++;
 	excell('A'.$rad, (string) $r['reise_inn_tidspunkt']);
-	excell('B'.$rad, (string) $r['pl_name']);
+	excell('B'.$rad, (string) utf8_encode($r['pl_name']));
 	excell('C'.$rad, (string) $r['reise_inn_mate']);
-	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) $r['reise_inn_sted']);
+	excell('D'.$rad, (string) $r['reise_inn_sted']);
+	excell('E'.$rad, 0);
 	excell('F'.$rad, (string) $r['reise_inn_dato']);
-	excell('G'.$rad, (string) $r['overnatting_spektrumdeltakere']);
+	excell('G'.$rad, (string) $r['systemet_overnatting_spektrumdeltakere']);
 	excell('H'.$rad, (string) $r['reise_inn_samtidig']);
 	excell('I'.$rad, (string) $r['reise_inn_samtidig_nei']);
 	
 	$objPHPExcel->setActiveSheetIndex(1);
 	excell('A'.$rad, (string) $r['reise_ut_tidspunkt']);
-	excell('B'.$rad, (string) $r['pl_name']);
+	excell('B'.$rad, (string) utf8_encode($r['pl_name']));
 	excell('C'.$rad, (string) $r['reise_ut_mate']);
 	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) $r['reise_ut_datp']);
-	excell('F'.$rad, (string) $r['overnatting_spektrumdeltakere']);
+	excell('E'.$rad, (string) $r['reise_ut_dato']);
+	excell('F'.$rad, (string) $r['systemet_overnatting_spektrumdeltakere']);
 	excell('G'.$rad, (string) $r['reise_ut_samtidig']);
 	excell('H'.$rad, (string) $r['reise_ut_samtidig_nei']);
 }
