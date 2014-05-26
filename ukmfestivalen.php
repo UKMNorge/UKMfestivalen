@@ -32,8 +32,10 @@ function UKMfestivalen_menu() {
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
 
 	UKM_add_menu_page('festivalen', 'Reise', 'Reise', 'administrator', 'UKMFreise', 'UKMFreise', 'http://ico.ukm.no/buss-menu.png',42);
-	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
+	UKM_add_scripts_and_styles( 'UKMFreise', 'UKMfestivalen_script' );
 
+	UKM_add_menu_page('festivalen', 'Mat & behov', 'Mat & behov', 'administrator', 'UKMFtilpasninger', 'UKMFtilpasninger', 'http://ico.ukm.no/medical-case-menu.png',42);
+	UKM_add_scripts_and_styles( 'UKMtilpasninger', 'UKMfestivalen_script' );
 }
 
 ## INCLUDE SCRIPTS
@@ -69,6 +71,9 @@ function UKMFovernatting() {
 
 function UKMFreise() {
 	UKMfestivalen('reise');
+}
+function UKMFtilpasninger() {
+	UKMfestivalen('tilpasninger');
 }
 
 
