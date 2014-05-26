@@ -5,14 +5,14 @@ $sql = new SQL("SELECT *
 				FROM `smartukm_videresending_infoskjema` AS `info`
 				JOIN `smartukm_place` AS `place` ON (`info`.`pl_id_from` = `place`.`pl_id`)
 				WHERE `info`.`pl_id` = '#place'
-				ORDER BY `reise_inn_mate`, `reise_inn_dato` ASC",
+				ORDER BY `pl_name` ASC",
 				array('place' => get_option('pl_id')) );
 $res = $sql->run();
 
 global $objPHPExcel;
 $objPHPExcel = null;
 exInit('Mat og tilrettelegging UKM-Festivalen');
-exSheetName('Ankomst');
+exSheetName('Mat');
 
 $objPHPExcel->createSheet(1);
 $objPHPExcel->setActiveSheetIndex(1);
