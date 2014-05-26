@@ -35,12 +35,11 @@ $objPHPExcel->setActiveSheetIndex(1);
 excell('A'.$rad, 'Avreisetid','bold');
 excell('B'.$rad, 'Fylke','bold');
 excell('C'.$rad, 'Reisemåte','bold');
-excell('D'.$rad, 'Avreisested','bold');
-excell('E'.$rad, 'Antall','bold');
-excell('F'.$rad, 'Avreisedato','bold');
-excell('G'.$rad, 'Totalt ant deltakere','bold');
-excell('H'.$rad, 'Alle samtidig?','bold');
-excell('I'.$rad, 'Kommentarer','bold');
+excell('D'.$rad, 'Antall','bold');
+excell('E'.$rad, 'Avreisedato','bold');
+excell('F'.$rad, 'Totalt ant deltakere','bold');
+excell('G'.$rad, 'Alle samtidig?','bold');
+excell('H'.$rad, 'Kommentarer','bold');
 
 
 while( $r = mysql_fetch_assoc( $res ) ) {
@@ -62,11 +61,10 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 	excell('B'.$rad, (string) utf8_encode($r['pl_name']));
 	excell('C'.$rad, (string) utf8_encode($r['reise_ut_mate']));
 	excell('D'.$rad, 0);
-	excell('E'.$rad, (string) utf8_encode($r['reise_ut_sted']));
-	excell('F'.$rad, (string) utf8_encode($r['reise_ut_tidspunkt']));
-	excell('G'.$rad, (string) utf8_encode($r['overnatting_spektrumdeltakere']));
-	excell('H'.$rad, (string) utf8_encode($r['reise_ut_samtidig']));
-	excell('I'.$rad, (string) utf8_encode($r['reise_ut_samtidig_nei']));
+	excell('E'.$rad, (string) utf8_encode($r['reise_ut_tidspunkt']));
+	excell('F'.$rad, (string) utf8_encode($r['overnatting_spektrumdeltakere']));
+	excell('G'.$rad, (string) utf8_encode($r['reise_ut_samtidig']));
+	excell('H'.$rad, (string) utf8_encode($r['reise_ut_samtidig_nei']));
 }
 
 $TWIG['excel_reise'] = exWrite($objPHPExcel,'UKMF_Reise_UKMFestivalen');
