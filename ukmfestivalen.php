@@ -30,6 +30,10 @@ function UKMfestivalen_menu() {
 	global $UKMN;
 	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',40);
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
+
+	UKM_add_menu_page('festivalen', 'Reise', 'Reise', 'administrator', 'UKMFreise', 'UKMFreise', 'http://ico.ukm.no/buss-menu.png',42);
+	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
+
 }
 
 ## INCLUDE SCRIPTS
@@ -61,6 +65,10 @@ function UKMfestivalen($VIEW) {
 
 function UKMFovernatting() {
 	UKMfestivalen('overnatting');
+}
+
+function UKMFreise() {
+	UKMfestivalen('reise');
 }
 
 
