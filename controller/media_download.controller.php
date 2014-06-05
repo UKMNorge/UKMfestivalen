@@ -36,6 +36,9 @@ foreach( $alle_innslag as $order => $inn ) {
 				$media_ok = false;
 			} else {
 				$innslag->media->kunstner = image_selected( $innslag, 0, 'bilde_kunstner', 'original' );
+				if(!is_string( $innslag->media->image )) {
+					$innslag->media->image->localpath = localpath_by_rel_id( $innslag->media->image->ID );
+				}
 				if( $innslag->media->kunstner == 'none_selected' ) {
 					$media_ok = false;
 				}
@@ -51,6 +54,9 @@ foreach( $alle_innslag as $order => $inn ) {
 						$media_ok = false;
 					} else {
 						$tittel->media->image = image_selected( $innslag, $tittel->t_id, 'bilde', 'original' );
+						if(!is_string( $innslag->media->image )) {
+							$innslag->media->image->localpath = localpath_by_rel_id( $innslag->media->image->ID );
+						}
 						if( $tittel->media->image == 'none_selected' ) {
 							$media_ok = false;
 						}
@@ -68,6 +74,9 @@ foreach( $alle_innslag as $order => $inn ) {
 				$media_ok = false;
 			} else {
 				$innslag->media->image = image_selected( $innslag, false, 'bilde', 'original' );
+				if(!is_string( $innslag->media->image )) {
+					$innslag->media->image->localpath = localpath_by_rel_id( $innslag->media->image->ID );
+				}
 				if( $innslag->media->image == 'none_selected' ) {
 					$media_ok = false;
 				}
@@ -94,4 +103,36 @@ foreach( $alle_innslag as $order => $inn ) {
 
 var_dump( $TWIG['innslag'] );
 
+
+
+function localpath_by_rel_id($rel_id) {
+	if( !is_numeric( $rel_id ) ) {
+		return false;
+	}
+	$qry = new SQL("SELECT * 
+					FROM `ukmno_wp_related`
+					WHERE `rel_id` = '#rel_id'",
+					array('rel_id'=>$rel_id));
+	$res = $qry->run('array');
+	$res['post_meta'] = unserialize($res['post_meta']);
+
+	$url = $res['blog_url'].'/files/'.$res['post_meta']['sizes']['thumbnail']['file'];
+	$full = $res['blog_url'].'/files/'.$res['post_meta']['file']; 
+	$large = $res['blog_url'].'/files/'
+			. (isset($res['post_meta']['sizes']['large']) 
+				? $res['post_meta']['sizes']['large']['file']
+				: $res['post_meta']['file']
+				);
+	if($url == '/files/')
+		return 'bilde mangler';
+
+	return UKM_HOME.'../wp-content/blogs.dir/'.$res['blog_id'].'/files/'.$res['post_meta']['file'];
+
+/*
+	$full = str_replace('http://','http123',$full);
+	return '<a href="'.$large.'"><img src="'.$url.'" /></a>'
+		.  '<br />'
+		.  '<a href="http://ukm.no/wp-content/plugins/UKMimages/download.php?image='.$full.'&name='.$name.'" target="_blank">Last ned original</a>';
+*/
+}
 ?>
