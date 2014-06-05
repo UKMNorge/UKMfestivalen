@@ -48,9 +48,9 @@ exSheetName('Gjester');
 excell('A1', 'Fylke', 'bold');
 excell('B1', 'Navn', 'bold');
 excell('C1', 'Mobil', 'bold');
-excell('D1', 'E-post', 'bold');
+/*excell('D1', 'E-post', 'bold');
 excell('E1', 'Prisgruppe', 'bold');
-
+*/
 $rad = 1;
 foreach( $ledere as $leder ) {
 	$rad++;
