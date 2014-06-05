@@ -101,8 +101,26 @@ foreach( $alle_innslag as $order => $inn ) {
 	$TWIG['innslag'][] = $innslag;
 }
 
-var_dump( $TWIG['innslag'] );
-
+if(isset($_GET['zip'])) {
+	require_once('UKM/zip.class.php');
+	$forestilling = new forestilling( $_GET['c_id'] );
+	$zip = new zip( 'UKM-Festivalen '. date('Y') .' '. $forestilling->get('c_name') , true );
+	foreach( $TWIG['innslag'] as $innslag ) {
+		if( !is_string( $innslag->media->image ) ) {
+			$extPos = strrpos('.', $innslag->media->image->localpath );
+			$ext = substr($innslag->media->image->localpath, $extPos);
+			
+			$path = $innslag->media->image->localpath;
+			$name = 'UKM-Festivalen '. date('Y') .' '
+				. $forestilling->get('c_name') .' - '
+				. $innslag->rekkefolge .' '. $innslag->navn 
+				. $ext;
+			
+			$zip->add( $path, $name );
+		}
+	}
+	$TWIG['zipfile'] = $zip->compress();
+}
 
 
 function localpath_by_rel_id($rel_id) {
@@ -126,13 +144,6 @@ function localpath_by_rel_id($rel_id) {
 	if($url == '/files/')
 		return 'bilde mangler';
 
-	return UKM_HOME.'../wp-content/blogs.dir/'.$res['blog_id'].'/files/'.$res['post_meta']['file'];
-
-/*
-	$full = str_replace('http://','http123',$full);
-	return '<a href="'.$large.'"><img src="'.$url.'" /></a>'
-		.  '<br />'
-		.  '<a href="http://ukm.no/wp-content/plugins/UKMimages/download.php?image='.$full.'&name='.$name.'" target="_blank">Last ned original</a>';
-*/
+	return '/home/ukmno/public_html/wp-content/blogs.dir/'.$res['blog_id'].'/files/'.$res['post_meta']['file'];
 }
 ?>
