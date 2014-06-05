@@ -54,11 +54,11 @@ excell('E1', 'Prisgruppe', 'bold');
 $rad = 1;
 foreach( $ledere as $leder ) {
 	$rad++;
-	excell('A'.$rad, $leder->fylke);
-	excell('B'.$rad, $leder->l_navn);
+/*	excell('A'.$rad, $leder->fylke);
+	excell('B'.$rad, utf8_encode($leder->l_navn));
 	excell('C'.$rad, $leder->l_mobilnummer);
 	excell('D'.$rad, $leder->l_epost);
-	excell('E'.$rad, $leder->gratis ? 'Gratis' : 'Betalt');
+	excell('E'.$rad, $leder->gratis ? 'Gratis' : 'Betalt');*/
 }
 $TWIG['excel_middag'] = exWrite($objPHPExcel,'UKMF_Ledermiddag_UKMFestivalen');
 
