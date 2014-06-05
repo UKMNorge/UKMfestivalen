@@ -89,7 +89,7 @@ foreach( $alle_innslag as $order => $inn ) {
 			break;
 	}	
 	
-	$TWIG['innslag'][$sort][] = $innslag;
+	$TWIG['innslag'][] = $innslag;
 }
 
 var_dump( $TWIG['innslag'] );
