@@ -39,6 +39,10 @@ function UKMfestivalen_menu() {
 
 	UKM_add_menu_page('festivalen', 'Mat & behov', 'Mat & behov', 'administrator', 'UKMFtilpasninger', 'UKMFtilpasninger', 'http://ico.ukm.no/medical-case-menu.png',43);
 	UKM_add_scripts_and_styles( 'UKMtilpasninger', 'UKMfestivalen_script' );
+
+	UKM_add_menu_page('festivalen', 'Ledermiddag', 'Ledermiddag', 'administrator', 'UKMFmiddag', 'UKMFmiddag', 'http://ico.ukm.no/chef-menu.png',44);
+	UKM_add_scripts_and_styles( 'UKMFreise', 'UKMfestivalen_script' );
+
 }
 
 ## INCLUDE SCRIPTS
@@ -80,6 +84,9 @@ function UKMFtilpasninger() {
 }
 function UKMFmedia() {
 	UKMfestivalen('media');
+}
+function UKMFmiddag() {
+	UKMfestivalen('middag');
 }
 
 

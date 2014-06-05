@@ -1,0 +1,15 @@
+<h1>Ledermiddag</h1>
+
+<p>
+	<a href="{{excel_middag}}" target="_blank">Last ned som excel-ark</a>
+</p>
+
+<table class="table table-striped">
+	{% for l in ledere %}
+		<tr>
+			<td>{{l.fylke}}</td>
+			<td>{{l.navn}}</td>
+			<td>{{l.gratis ? 'gratis' : 'betalt'}}</td>
+		</tr>
+	{% endfor %}
+</table>
