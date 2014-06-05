@@ -3,6 +3,7 @@
 <p class="lead">Velg hvilken hendelse du ønsker tilknyttede bilder for</p>
 
 <ol class="list-unstyled">
+	<li><a href="?page=UKMFmedia&kunstnere=true">Bilder av kunstnerne</a></li>
 {% for forestilling in forestillinger %}
 	<li><a href="?page=UKMFmedia&c_id={{forestilling.c_id}}">{{forestilling.c_name}}</a></li>
 {% endfor %}

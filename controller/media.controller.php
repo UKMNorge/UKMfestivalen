@@ -6,7 +6,7 @@ $TWIG['c_id'] = $_GET['c_id'];
 
 $m = new monstring( get_option('pl_id') );
 
-if( isset( $_GET['c_id'] ) ) {
+if( isset( $_GET['c_id'] ) || isset( $_GET['kunstnere'] ) ) {
 	require_once('media_download.controller.php');
 	
 	if( isset( $_GET['zip'] ) ) {
