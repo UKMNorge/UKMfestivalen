@@ -4,7 +4,11 @@
 
 
 <ol class="list-unstyled">
-{% for i in innslag if i.media.image != 'none_uploaded' and i.media.image != 'none_selected' %}
+{% for i in innslag %}
+	{% if i.media.image != 'none_uploaded' and i.media.image != 'none_selected' %}
 	<li><a href="i.media.image">{{i.rekkefolge}}. {{i.navn}}</a></li>
+	{% else %}
+		<li>{{i.rekkefolge}}. {{i.navn}}</li>
+	{% endif %}
 {% endfor %}
 </ol>
