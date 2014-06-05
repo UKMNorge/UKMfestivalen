@@ -1,3 +1,10 @@
 <h1>Last ned mediafiler</h1>
 
-<p class="lead">Last ned zip-fil</p>
+<p class="lead">Last ned zip-fil eller enkeltbilder</p>
+
+
+<ol class="list-unstyled">
+{% for i in innslag if i.media.image != 'none_uploaded' and i.media.image != 'none_selected' %}
+	<li><a href="i.media.image">{{i.rekkefolge}}. {{i.navn}}</a></li>
+{% endfor %}
+</ol>
