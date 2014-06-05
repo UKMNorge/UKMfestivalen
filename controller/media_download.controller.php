@@ -35,7 +35,7 @@ foreach( $alle_innslag as $order => $inn ) {
 				$innslag->media->kunstner = 'none_uploaded';
 				$media_ok = false;
 			} else {
-				$innslag->media->kunstner = image_selected( $innslag, 0, 'bilde_kunstner' );
+				$innslag->media->kunstner = image_selected( $innslag, 0, 'bilde_kunstner', 'original' );
 				if( $innslag->media->kunstner == 'none_selected' ) {
 					$media_ok = false;
 				}
@@ -50,7 +50,7 @@ foreach( $alle_innslag as $order => $inn ) {
 						$tittel->media->image = 'none_uploaded';
 						$media_ok = false;
 					} else {
-						$tittel->media->image = image_selected( $innslag, $tittel->t_id );
+						$tittel->media->image = image_selected( $innslag, $tittel->t_id, 'bilde', 'original' );
 						if( $tittel->media->image == 'none_selected' ) {
 							$media_ok = false;
 						}
@@ -67,7 +67,7 @@ foreach( $alle_innslag as $order => $inn ) {
 				$innslag->media->image = 'none_uploaded';
 				$media_ok = false;
 			} else {
-				$innslag->media->image = image_selected( $innslag );
+				$innslag->media->image = image_selected( $innslag, false, 'bilde', 'original' );
 				if( $innslag->media->image == 'none_selected' ) {
 					$media_ok = false;
 				}
