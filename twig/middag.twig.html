@@ -5,11 +5,24 @@
 </p>
 
 <table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Fylke</th>
+			<th>Navn</th>
+			<th>Mobil</th>
+			<th>E-post</th>
+			<th>Prisgruppe</th>
+		</tr>
+	</thead>
+	<tbody>
 	{% for l in ledere %}
 		<tr>
 			<td>{{l.fylke}}</td>
-			<td>{{l.navn}}</td>
+			<td>{{l.l_navn}}</td>
+			<td>{{l.l_mobilnummer}}</td>
+			<td>{{l.l_epost}}</td>
 			<td>{{l.gratis ? 'gratis' : 'betalt'}}</td>
 		</tr>
 	{% endfor %}
+	</tbody>
 </table>

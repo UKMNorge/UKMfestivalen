@@ -1,5 +1,6 @@
 <?php
 require_once( PLUGIN_DIR_PATH_UKMFESTIVALEN.'../UKMvideresending_festival/functions.php' );
+require_once( PLUGIN_DIR_PATH_UKMFESTIVALEN.'../UKMvideresending_festival/class/leder.class.php' );
 require_once('UKM/inc/excel.inc.php');
 
 $sql = new SQL("SELECT `ledermiddag_ukm` AS `ukm`,
@@ -16,26 +17,23 @@ $res = $sql->run();
 $ledere = array();
 while( $r = mysql_fetch_assoc( $res ) ) {
 	$pl_to = new monstring( $r['pl_from'] );
-	if( !empty( $r['ukm'] ) ) {
-		$leder = new stdClass();
+	if( !empty( $r['ukm'] ) && is_numeric( $r['ukm'] ) ) {
+		$leder = new leder( $r['ukm'] );
 		$leder->fylke = $pl_to->g('pl_name');
-		$leder->navn = utf8_encode($r['ukm']);
 		$leder->gratis = true;
 		$ledere[] = $leder;
 	}
 
-	if( !empty( $r['fylke1'] ) ) {
-		$leder = new stdClass();
+	if( !empty( $r['fylke1'] ) && is_numeric( $r['fylke1'] ) ) {
+		$leder = new leder( $r['fylke1'] );
 		$leder->fylke = $pl_to->g('pl_name');
-		$leder->navn = utf8_encode($r['fylke1']);
 		$leder->gratis = false;
 		$ledere[] = $leder;
 	}
 
-	if( !empty( $r['fylke2'] ) ) {
-		$leder = new stdClass();
+	if( !empty( $r['fylke2'] ) && is_numeric( $r['fylke2'] ) ) {
+		$leder = new leder( $r['fylke2'] );
 		$leder->fylke = $pl_to->g('pl_name');
-		$leder->navn = utf8_encode($r['fylke2']);
 		$leder->gratis = false;
 		$ledere[] = $leder;
 	}
@@ -49,14 +47,18 @@ exSheetName('Gjester');
 
 excell('A1', 'Fylke', 'bold');
 excell('B1', 'Navn', 'bold');
-excell('C1', 'Prisgruppe', 'bold');
+excell('C1', 'Mobil', 'bold');
+excell('D1', 'E-post', 'bold');
+excell('E1', 'Prisgruppe', 'bold');
 
 $rad = 1;
 foreach( $ledere as $leder ) {
 	$rad++;
 	excell('A'.$rad, $leder->fylke);
-	excell('B'.$rad, $leder->navn);
-	excell('C'.$rad, $leder->gratis ? 'Gratis' : 'Betalt');
+	excell('B'.$rad, $leder->l_navn);
+	excell('C'.$rad, $leder->l_mobilnummer);
+	excell('D'.$rad, $leder->l_epost);
+	excell('E'.$rad, $leder->gratis ? 'Gratis' : 'Betalt');
 }
 $TWIG['excel_middag'] = exWrite($objPHPExcel,'UKMF_Ledermiddag_UKMFestivalen');
 
