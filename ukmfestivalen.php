@@ -28,13 +28,16 @@ function UKMfestivalen_ajax() {
 ## CREATE A MENU
 function UKMfestivalen_menu() {
 	global $UKMN;
-	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',40);
+	UKM_add_menu_page('festivalen', 'Mediefiler', 'Mediefiler', 'administrator', 'UKMFmedia', 'UKMFmedia', 'http://ico.ukm.no/media-menu.png',40);
+	UKM_add_scripts_and_styles( 'UKMFmedia', 'UKMfestivalen_script' );
+
+	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',41);
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
 
 	UKM_add_menu_page('festivalen', 'Reise', 'Reise', 'administrator', 'UKMFreise', 'UKMFreise', 'http://ico.ukm.no/buss-menu.png',42);
 	UKM_add_scripts_and_styles( 'UKMFreise', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Mat & behov', 'Mat & behov', 'administrator', 'UKMFtilpasninger', 'UKMFtilpasninger', 'http://ico.ukm.no/medical-case-menu.png',42);
+	UKM_add_menu_page('festivalen', 'Mat & behov', 'Mat & behov', 'administrator', 'UKMFtilpasninger', 'UKMFtilpasninger', 'http://ico.ukm.no/medical-case-menu.png',43);
 	UKM_add_scripts_and_styles( 'UKMtilpasninger', 'UKMfestivalen_script' );
 }
 
@@ -74,6 +77,9 @@ function UKMFreise() {
 }
 function UKMFtilpasninger() {
 	UKMfestivalen('tilpasninger');
+}
+function UKMFmedia() {
+	UKMfestivalen('media');
 }
 
 
