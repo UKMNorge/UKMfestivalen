@@ -110,8 +110,6 @@ if(isset($_GET['zip'])) {
 			$extPos = strrpos($innslag->media->image->localpath, '.');
 			$ext = substr($innslag->media->image->localpath, $extPos);
 			
-			var_dump( $ext );
-			
 			$path = $innslag->media->image->localpath;
 			$name = 'UKM-Festivalen '. date('Y') .' '
 				. $forestilling->get('c_name') .' - '
