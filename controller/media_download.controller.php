@@ -107,7 +107,7 @@ if(isset($_GET['zip'])) {
 	$zip = new zip( 'UKM-Festivalen '. date('Y') .' '. $forestilling->get('c_name') , true );
 	foreach( $TWIG['innslag'] as $innslag ) {
 		if( !is_string( $innslag->media->image ) ) {
-			$extPos = strrpos('.', $innslag->media->image->localpath );
+			$extPos = strrpos($innslag->media->image->localpath, '.');
 			$ext = substr($innslag->media->image->localpath, $extPos);
 			
 			var_dump( $ext );
