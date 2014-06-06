@@ -86,6 +86,8 @@ function UKMFmedia() {
 	UKMfestivalen('media');
 }
 function UKMFmiddag() {
+	if( !defined('EXCEL_WRITE_PATH') ) 
+		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
 	UKMfestivalen('middag');
 }
 
