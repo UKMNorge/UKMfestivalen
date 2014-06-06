@@ -3,11 +3,13 @@ require_once( 'UKM/inc/excel.inc.php');
 
 $sql = new SQL("SELECT *
 				FROM `smartukm_videresending_infoskjema` AS `info`
-				JOIN `smartukm_place` AS `place` ON (`info`.`pl_id_from` = `place`.`pl_id`)
+				LEFT JOIN `smartukm_place` AS `place` ON (`info`.`pl_id_from` = `place`.`pl_id`)
 				WHERE `info`.`pl_id` = '#place'
 				ORDER BY `reise_inn_mate`, `reise_inn_dato` ASC",
 				array('place' => get_option('pl_id')) );
 $res = $sql->run();
+
+echo $sql->debug();
 
 global $objPHPExcel;
 $objPHPExcel = null;
