@@ -59,6 +59,8 @@ function UKMfestivalen_script() {
 
 ## SHOW STATS OF PLACES
 function UKMfestivalen($VIEW) {
+	define('ZIP_WRITE_PATH', '/home/ukmno/public_subdomains/download/zip/');
+
 	$TWIG = array();	
 
 	if( isset( $_GET['action'] ) ) {
