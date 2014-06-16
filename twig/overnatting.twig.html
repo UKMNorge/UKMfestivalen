@@ -80,7 +80,7 @@
 				<tr>
 					<td>{{gruppe|capitalize}}</td>
 					{% for natt in alle_netter %} 
-						<td>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]}}</td>
+						<td>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]|length}}</td>
 					{% endfor %}
 				</tr>
 			{% endfor %}
@@ -90,7 +90,7 @@
 				<tr>
 					<th>{{gruppe|capitalize}}</th>
 					{% for natt in alle_netter %} 
-						<th>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]}}</th>
+						<th>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]|length}}</th>
 					{% endfor %}
 				</tr>
 			{% endfor %}

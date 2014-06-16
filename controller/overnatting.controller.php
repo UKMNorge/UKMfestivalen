@@ -32,9 +32,9 @@ require_once( 'UKM/inc/excel.inc.php');
 	$count_dobbel = array();
 	foreach( $alle_netter as $num => $data ) {
 		$count_enkel['ledere'][ $data->dag.'.'.$data->mnd ] = 0;
-		$count_dobbel['ledere'][$data->dag.'.'.$data->mnd ] = 0;
+		$count_dobbel['ledere'][$data->dag.'.'.$data->mnd ] = array();
 		$count_enkel['total'][ $data->dag.'.'.$data->mnd ] = 0;
-		$count_dobbel['total'][$data->dag.'.'.$data->mnd ] = 0;
+		$count_dobbel['total'][$data->dag.'.'.$data->mnd ] = array();
 	}
 
 // LAST INN INFO OM LEDERE
@@ -113,7 +113,7 @@ require_once( 'UKM/inc/excel.inc.php');
 
 		foreach( $alle_netter as $num => $data ) {
 			$count_enkel[$gruppe][ $data->dag.'.'.$data->mnd ] = 0;
-			$count_dobbel[$gruppe][$data->dag.'.'.$data->mnd ] = 0;
+			$count_dobbel[$gruppe][$data->dag.'.'.$data->mnd ] = array();
 		}
 
 		$excelArk++;
@@ -154,8 +154,8 @@ require_once( 'UKM/inc/excel.inc.php');
 					$count_enkel['total'][ $data->dag.'.'.$data->mnd ]++;
 				}
 				if( $text == 'x' && $p['romtype'] == 'dobbelt') {
-					$count_dobbel[$gruppe][ $data->dag.'.'.$data->mnd ]++;
-					$count_dobbel['total'][ $data->dag.'.'.$data->mnd ]++;
+					$count_dobbel[$gruppe][ $data->dag.'.'.$data->mnd ][$p['rom']]=true;
+					$count_dobbel['total'][ $data->dag.'.'.$data->mnd ][$p['rom']]=true;
 				}
 					
 				excell(i2a($col+$num).$rad, $text);
