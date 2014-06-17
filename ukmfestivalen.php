@@ -43,6 +43,9 @@ function UKMfestivalen_menu() {
 	UKM_add_menu_page('festivalen', 'Ledermiddag', 'Ledermiddag', 'administrator', 'UKMFmiddag', 'UKMFmiddag', 'http://ico.ukm.no/chef-menu.png',44);
 	UKM_add_scripts_and_styles( 'UKMFreise', 'UKMfestivalen_script' );
 
+	UKM_add_menu_page('festivalen', 'Ledere', 'Ledere', 'administrator', 'UKMFledere', 'UKMFledere', 'http://ico.ukm.no/user-menu.png',44);
+	UKM_add_scripts_and_styles( 'UKMFledere', 'UKMfestivalen_script' );
+
 }
 
 ## INCLUDE SCRIPTS
@@ -91,6 +94,11 @@ function UKMFmiddag() {
 	if( !defined('EXCEL_WRITE_PATH') ) 
 		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
 	UKMfestivalen('middag');
+}
+function UKMFledere() {
+	if( !defined('EXCEL_WRITE_PATH') ) 
+		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
+	UKMfestivalen('ledere');
 }
 
 

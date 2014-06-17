@@ -1,0 +1,15 @@
+<h1>Kontaktinfo til ledere</h1>
+<p class="lead">Henter ut lederlistene alle fylkene har lagt inn ved videresending</p>
+
+<h3>Kommaseparert</h3>
+<p>
+	{% for leder in ledere if leder.l_epost is not empty %}
+		{{leder.l_epost}},
+	{% endfor %}
+</p>
+<h3>Semikolon-separert</h3>
+<p>
+	{% for leder in ledere if leder.l_epost is not empty %}
+		{{leder.l_epost}}; 
+	{% endfor %}
+</p>
