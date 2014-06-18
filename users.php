@@ -1,6 +1,7 @@
 <?php
+require_once('UKM/innslag.class.php');
+require_once('UKM/inc/password.inc.php');
 function UKMFestivalen_brukere_opprett() {
-	
 	$m = new monstring(get_option('pl_id'));
 	$innslag = $m->innslag_btid();
 	
@@ -17,11 +18,15 @@ function UKMFestivalen_brukere_opprett() {
 				foreach( $deltakere as $deltaker ) {
 					
 					$username = $deltaker['p_firstname'].'.'.$deltaker['p_lastname'];
-					$email    = '';
-					$password = '';
+					$email    = UKM_ordpass() . '@fakeukm.no';
+					$password = UKM_ordpass();
 					
-					echo $username;
+					echo $username . '-' . $password;
 					
+					$user_id = username_exists( $username );
+					if(!$user_id and email_exists($email) == false ) {
+					    $user_id = wp_create_user( $username, $password, $email );
+					}
 				}
 							
 			}
