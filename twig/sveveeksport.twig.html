@@ -1,0 +1,10 @@
+<h1>Last ned excel-ark for bruk med Sveve</h1>
+
+<ol class="list-unstyled">
+
+	{% for exp in excel %}
+		<li>
+			<a href="{{exp.url}}">{{exp.name}}</a>
+		</li>
+	{% endfor %}
+</ol>

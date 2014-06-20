@@ -28,6 +28,9 @@ function UKMfestivalen_ajax() {
 ## CREATE A MENU
 function UKMfestivalen_menu() {
 	global $UKMN;
+	UKM_add_menu_page('festivalen', 'Ledere', 'Ledere', 'administrator', 'UKMFledere', 'UKMFledere', 'http://ico.ukm.no/user-menu.png',44);
+	UKM_add_scripts_and_styles( 'UKMFledere', 'UKMfestivalen_script' );
+
 	UKM_add_menu_page('festivalen', 'Mediefiler', 'Mediefiler', 'administrator', 'UKMFmedia', 'UKMFmedia', 'http://ico.ukm.no/media-menu.png',40);
 	UKM_add_scripts_and_styles( 'UKMFmedia', 'UKMfestivalen_script' );
 
@@ -43,9 +46,8 @@ function UKMfestivalen_menu() {
 	UKM_add_menu_page('festivalen', 'Ledermiddag', 'Ledermiddag', 'administrator', 'UKMFmiddag', 'UKMFmiddag', 'http://ico.ukm.no/chef-menu.png',44);
 	UKM_add_scripts_and_styles( 'UKMFreise', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Ledere', 'Ledere', 'administrator', 'UKMFledere', 'UKMFledere', 'http://ico.ukm.no/user-menu.png',44);
-	UKM_add_scripts_and_styles( 'UKMFledere', 'UKMfestivalen_script' );
-
+	UKM_add_menu_page('festivalen', 'Sveveeksport', 'Sveveeksport', 'administrator', 'UKMFsveveeksport', 'UKMFsveveeksport', 'http://ico.ukm.no/export-menu.png',45);
+	UKM_add_scripts_and_styles( 'UKMFsveveeksport', 'UKMfestivalen_script' );
 }
 
 ## INCLUDE SCRIPTS
@@ -62,6 +64,9 @@ function UKMfestivalen_script() {
 
 ## SHOW STATS OF PLACES
 function UKMfestivalen($VIEW) {
+	if( !defined('EXCEL_WRITE_PATH') ) 
+		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
+
 	define('ZIP_WRITE_PATH', '/home/ukmno/public_subdomains/download/zip/');
 
 	$TWIG = array();	
@@ -91,14 +96,13 @@ function UKMFmedia() {
 	UKMfestivalen('media');
 }
 function UKMFmiddag() {
-	if( !defined('EXCEL_WRITE_PATH') ) 
-		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
 	UKMfestivalen('middag');
 }
 function UKMFledere() {
-	if( !defined('EXCEL_WRITE_PATH') ) 
-		define('EXCEL_WRITE_PATH', '/home/ukmno/public_subdomains/download/phpexcel/');
 	UKMfestivalen('ledere');
+}
+function UKMFsveveeksport() {
+	UKMfestivalen('sveveeksport');
 }
 
 
