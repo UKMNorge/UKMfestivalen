@@ -14,8 +14,28 @@ $ledere = new SQL("SELECT `l_id`,`sort`.`pl_name`
 				);
 $res = $ledere->run();
 
+require_once('UKM/inc/excel.inc.php');
+global $objPHPExcel;
+exInit('Ledere på UKM-festivalen');
+exSheetName( 'Ledere' );
+
+excell('A1','Fylke');
+excell('B1','Navn');
+excell('C1','Nummer');
+excell('D1','E-post');
+
+$rad = 1;
 while( $r = mysql_fetch_assoc( $res ) ) {
 	$leder = new leder( $r['l_id'] );
 	
+	$rad++;
+	
+	excell('A'.$rad, $leder->l_fylke);
+	excell('B'.$rad, $leder->l_navn);
+	excell('C'.$rad, $leder->l_mobilnummer);
+	excell('D'.$rad, $leder->l_epost);
+	
 	$TWIG['ledere'][] = $leder;
 }
+
+$TWIG['excel'] = exWrite($objPHPExcel, 'UKMF_Ledere');
