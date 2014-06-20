@@ -39,7 +39,7 @@ foreach($innslag as $band_type => $bands) {
 	
 	$excelData = new stdClass();
 	$excelData->name = $bt[$band_type];
-	$excelData->url = exWrite($objPHPExcel, 'UKMF_Sveveksport_'.$excelData->name);
+	$excelData->url = exWrite($objPHPExcel, 'UKMF_Sveveksport_'.$band_type_name);
 	
 	$TWIG['excel'][] = $excelData;
 }
