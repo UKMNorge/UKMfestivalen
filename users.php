@@ -13,20 +13,23 @@ function UKMFestivalen_brukere_opprett() {
 				
 				$inn = new innslag($band['b_id']);
 				$inn->videresendte($m->g('pl_id'));
-				$deltakere = $inn->personer();
+				$deltakere = $inn->personObjekter();
 				
 				foreach( $deltakere as $deltaker ) {
-					
-					$username = $deltaker['p_firstname'].'.'.$deltaker['p_lastname'];
+					$deltaker->loadGEO();
+					$username = $deltaker->get('p_firstname').'.'.$deltaker->get('p_lastname');
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
-					
+					$title    = utf8_decode($deltaker->get('instrument'));
+					$description = $deltaker->get('p_firstname') . ' ' . $deltaker->get('p_lastname') . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune') . ' i ' . $deltaker->get('fylke');
 					echo $username . '-' . $password;
 					
 					$user_id = username_exists( $username );
 					if(!$user_id and email_exists($email) == false ) {
 					    $user_id = wp_create_user( $username, $password, $email );
 					}
+					update_user_meta($user_id, 'Title', $title);
+					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'title' => $role ) );
 				}
 							
 			}
