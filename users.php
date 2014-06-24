@@ -32,6 +32,7 @@ function UKMFestivalen_brukere_opprett() {
 					
 					$user_id = username_exists( $username );
 					if($user_id) {
+					    wp_set_password($password, $user_id);
 					    //$user = email_exists('kontoer@ukm.no');
 					    //require_once(ABSPATH.'wp-admin/includes/user.php' );
     					//wp_delete_user($user_id, $user);
