@@ -18,12 +18,14 @@ function UKMFestivalen_brukere_opprett() {
 				foreach( $deltakere as $deltaker ) {
 					$description = '';
 					$deltaker->loadGEO();
-					$username = $deltaker->get('p_firstname').'.'.$deltaker->get('p_lastname');
+					$firstname = explode(' ', $deltaker->get('p_firstname'));
+					$lastname = explode(' ', $deltaker->get('p_lastname'));
+					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
 					$title    = utf8_decode($deltaker->get('instrument'));
 					$description = $deltaker->get('p_firstname') . ' ' . $deltaker->get('p_lastname') . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune') . ' i ' . $deltaker->get('fylke');
-					echo $username . '-' . $password;
+					echo $username . '-' . $password . '<br />';
 					
 					$user_id = username_exists( $username );
 					if(!$user_id and email_exists($email) == false ) {
