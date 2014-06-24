@@ -20,7 +20,10 @@ function UKMFestivalen_brukere_opprett() {
 					$deltaker->loadGEO();
 					$firstname = explode(' ', $deltaker->get('p_firstname'));
 					$lastname = explode(' ', $deltaker->get('p_lastname'));
-					$username = utf8_decode(strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1])));
+					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
+					$username = str_replace('æ', 'e', $username);
+					$username = str_replace('ø', 'o', $username);
+					$username = str_replace('å', 'a', $username);
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
 					$title    = utf8_decode($deltaker->get('instrument'));
