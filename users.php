@@ -20,7 +20,7 @@ function UKMFestivalen_brukere_opprett() {
 					$deltaker->loadGEO();
 					$firstname = explode(' ', $deltaker->get('p_firstname'));
 					$lastname = explode(' ', $deltaker->get('p_lastname'));
-					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
+					$username = utf8_decode(strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1])));
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
 					$title    = utf8_decode($deltaker->get('instrument'));
@@ -39,7 +39,7 @@ function UKMFestivalen_brukere_opprett() {
     					}
 					}
 					update_user_meta($user_id, 'Title', $title);
-					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'role' => 'author' ) );
+					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'role' => 'contributor' ) );
 				}
 							
 			}
