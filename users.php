@@ -18,16 +18,16 @@ function UKMFestivalen_brukere_opprett() {
 				foreach( $deltakere as $deltaker ) {
 					$description = '';
 					$deltaker->loadGEO();
-					$firstname = explode(' ', utf8_encode(utf8_decode($deltaker->get('p_firstname'))));
-					$lastname = explode(' ', utf8_encode(utf8_decode($deltaker->get('p_lastname'))));
+					$firstname = explode(' ', $deltaker->get('p_firstname', false));
+					$lastname = explode(' ', $deltaker->get('p_lastname', false));
 					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
 					$username = str_replace('æ', 'e', $username);
 					$username = str_replace('ø', 'o', $username);
 					$username = str_replace('å', 'a', $username);
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
-					$title    = utf8_decode($deltaker->get('instrument'));
-					$description = $deltaker->get('p_firstname') . ' ' . $deltaker->get('p_lastname') . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune') . ' i ' . $deltaker->get('fylke');
+					$title    = $deltaker->get('instrument', false);
+					$description = $deltaker->get('p_firstname', false) . ' ' . $deltaker->get('p_lastname',false) . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune',false) . ' i ' . $deltaker->get('fylke',false);
 					echo $username . '-' . $password . '<br />';
 					
 					/*$user_id = username_exists( $username );
