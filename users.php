@@ -29,8 +29,9 @@ function UKMFestivalen_brukere_opprett() {
 					
 					$user_id = username_exists( $username );
 					if($user_id) {
-					    $user = email_exists('kontoer@ukm.no');
-    					wp_remove_user($user_id, $user);
+					    //$user = email_exists('kontoer@ukm.no');
+					    //require_once(ABSPATH.'wp-admin/includes/user.php' );
+    					//wp_delete_user($user_id, $user);
 					}
 					else {
     					if(email_exists($email) == false ) {
@@ -38,7 +39,7 @@ function UKMFestivalen_brukere_opprett() {
     					}
 					}
 					update_user_meta($user_id, 'Title', $title);
-					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'title' => $role ) );
+					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'role' => 'author' ) );
 				}
 							
 			}
