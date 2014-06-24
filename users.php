@@ -16,6 +16,7 @@ function UKMFestivalen_brukere_opprett() {
 				$deltakere = $inn->personObjekter();
 				
 				foreach( $deltakere as $deltaker ) {
+					$description = '';
 					$deltaker->loadGEO();
 					$username = $deltaker->get('p_firstname').'.'.$deltaker->get('p_lastname');
 					$email    = UKM_ordpass() . '@fakeukm.no';
