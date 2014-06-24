@@ -18,8 +18,8 @@ function UKMFestivalen_brukere_opprett() {
 				foreach( $deltakere as $deltaker ) {
 					$description = '';
 					$deltaker->loadGEO();
-					$firstname = explode(' ', utf8_decode($deltaker->get('p_firstname')));
-					$lastname = explode(' ', utf8_decode($deltaker->get('p_lastname')));
+					$firstname = explode(' ', utf8_encode(utf8_decode($deltaker->get('p_firstname'))));
+					$lastname = explode(' ', utf8_encode(utf8_decode($deltaker->get('p_lastname'))));
 					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
 					$username = str_replace('æ', 'e', $username);
 					$username = str_replace('ø', 'o', $username);
