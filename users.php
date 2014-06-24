@@ -18,19 +18,19 @@ function UKMFestivalen_brukere_opprett() {
 				foreach( $deltakere as $deltaker ) {
 					$description = '';
 					$deltaker->loadGEO();
-					$firstname = explode(' ', $deltaker->get('p_firstname', false));
+					$firstname = explode(' ', $deltaker->get('p_firstname',false));
 					$lastname = explode(' ', $deltaker->get('p_lastname', false));
-					$username = strtolower(trim($firstname[0])).'.'.strtolower(trim($lastname[count($lastname)-1]));
+					$username = utf8_encode(strtolower(trim($firstname[0]))).'.'.utf8_encode(strtolower(trim($lastname[count($lastname)-1])));
 					$username = str_replace('æ', 'e', $username);
 					$username = str_replace('ø', 'o', $username);
 					$username = str_replace('å', 'a', $username);
 					$email    = UKM_ordpass() . '@fakeukm.no';
 					$password = UKM_ordpass();
-					$title    = $deltaker->get('instrument', false);
-					$description = $deltaker->get('p_firstname', false) . ' ' . $deltaker->get('p_lastname',false) . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune',false) . ' i ' . $deltaker->get('fylke',false);
+					$title    = $deltaker->get('instrument');
+					$description = $deltaker->get('p_firstname') . ' ' . $deltaker->get('p_lastname') . ' er ' . $deltaker->alder() . ' gammel og kommer fra ' . $deltaker->get('kommune') . ' i ' . $deltaker->get('fylke');
 					echo $username . '-' . $password . '<br />';
 					
-					/*$user_id = username_exists( $username );
+					$user_id = username_exists( $username );
 					if($user_id) {
 					    //$user = email_exists('kontoer@ukm.no');
 					    //require_once(ABSPATH.'wp-admin/includes/user.php' );
@@ -42,7 +42,7 @@ function UKMFestivalen_brukere_opprett() {
     					}
 					}
 					update_user_meta($user_id, 'Title', $title);
-					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'role' => 'contributor' ) );*/
+					wp_update_user( array( 'ID' => $user_id, 'description' => $description, 'role' => 'contributor' ) );
 				}
 							
 			}
