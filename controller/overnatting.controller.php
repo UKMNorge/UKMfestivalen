@@ -182,7 +182,7 @@ require_once( 'UKM/inc/excel.inc.php');
 		excell('B'.$rad, 'Navn','bold');
 		excell('C'.$rad, 'Mobil','bold');
 		excell('D'.$rad, 'E-post','bold');
-		excell('E'.$rad, 'Hovedleder');
+		excell('E'.$rad, 'Hovedleder','bold');
 
 /*		$sql = new SQL("SELECT * FROM `smartukm_videresending_ledere_natt` AS `natt`
 					JOIN `smartukm_videresending_ledere_ny` AS `leder` ON (`leder`.`l_id` = `natt`.`l_id`)
@@ -203,7 +203,6 @@ require_once( 'UKM/inc/excel.inc.php');
 							`leder`.`l_navn` ASC",
 					array('dag' => $natt->dag, 'mnd' => $natt->mnd, 'monstring' => get_option('pl_id')));
 		$res = $sql->run();
-		echo $sql->debug();
 		while( $r = mysql_fetch_assoc( $res ) ) {
 			$rad++;
 			if( $r['is_nattleder'] ) {
@@ -215,7 +214,7 @@ require_once( 'UKM/inc/excel.inc.php');
 			excell('B'.$rad, $r['l_navn'], $style);
 			excell('C'.$rad, $r['l_mobilnummer'], $style);
 			excell('D'.$rad, $r['l_epost'], $style);
-			excell('E'.$rad, $r['is_nattleder'] ? 'HOVEDLEDER' : '');
+			excell('E'.$rad, $r['is_nattleder'] ? 'HOVEDLEDER' : '', $style);
 		}
 	}
 	$TWIG['excel_deltakerovernatting'] = exWrite($objPHPExcel,'UKMF'.get_option('season').'_Deltakerovernatting_UKM_Norge');	
