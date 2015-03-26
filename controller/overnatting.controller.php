@@ -218,7 +218,7 @@ require_once( 'UKM/inc/excel.inc.php');
 			excell('E'.$rad, $r['is_nattleder'] ? 'HOVEDLEDER' : '');
 		}
 	}
-	$TWIG['excel_deltakerovernatting'] = exWrite($objPHPExcel,'UKMF_Deltakerovernatting_UKM_Norge');	
+	$TWIG['excel_deltakerovernatting'] = exWrite($objPHPExcel,'UKMF'.get_option('season').'_Deltakerovernatting_UKM_Norge');	
 	
 	$TWIG['alle_netter'] = $alle_netter;
 	$TWIG['count']['enkel'] = $count_enkel;
