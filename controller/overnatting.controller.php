@@ -200,7 +200,7 @@ require_once( 'UKM/inc/excel.inc.php');
 					AND `pl_id_to` = '#monstring'
 					ORDER BY `place`.`pl_name` ASC,
 							`is_nattleder` DESC,
-							`leder`.`l_navn` ASC"
+							`leder`.`l_navn` ASC",
 					array('dag' => $natt->dag, 'mnd' => $natt->mnd, 'monstring' => get_option('pl_id')));
 		$res = $sql->run();
 		while( $r = mysql_fetch_assoc( $res ) ) {
