@@ -203,6 +203,7 @@ require_once( 'UKM/inc/excel.inc.php');
 							`leder`.`l_navn` ASC",
 					array('dag' => $natt->dag, 'mnd' => $natt->mnd, 'monstring' => get_option('pl_id')));
 		$res = $sql->run();
+		echo $sql->debug();
 		while( $r = mysql_fetch_assoc( $res ) ) {
 			$rad++;
 			if( $r['is_nattleder'] ) {
