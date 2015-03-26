@@ -176,7 +176,7 @@ require_once( 'UKM/inc/excel.inc.php');
 		$objPHPExcel->setActiveSheetIndex($index);
 
 		exSheetName($natt->dag.'.'.$natt->mnd);
-		excell('A1:D1', 'Ledere i deltakerovernattingen '. $natt->dag .'.'. $natt->mnd, 'h1');
+		excell('A1:E1', 'Ledere i deltakerovernattingen '. $natt->dag .'.'. $natt->mnd, 'h1');
 		$rad = 2;
 		excell('A'.$rad, 'Fylke','bold');
 		excell('B'.$rad, 'Navn','bold');
