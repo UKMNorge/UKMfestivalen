@@ -28,6 +28,10 @@ function UKMfestivalen_ajax() {
 ## CREATE A MENU
 function UKMfestivalen_menu() {
 	global $UKMN;
+
+	UKM_add_menu_page('content', 'Forsiden', 'Forsiden', 'administrator', 'UKMFforside', 'UKMFforside', 'http://ico.ukm.no/toy-blue-menu.png',0);
+	UKM_add_scripts_and_styles( 'UKMFforside', 'UKMfestivalen_script' );
+
 	UKM_add_menu_page('festivalen', 'Ledere', 'Ledere', 'administrator', 'UKMFledere', 'UKMFledere', 'http://ico.ukm.no/user-menu.png',44);
 	UKM_add_scripts_and_styles( 'UKMFledere', 'UKMfestivalen_script' );
 
@@ -48,6 +52,12 @@ function UKMfestivalen_menu() {
 
 	UKM_add_menu_page('festivalen', 'Sveveeksport', 'Sveveeksport', 'administrator', 'UKMFsveveeksport', 'UKMFsveveeksport', 'http://ico.ukm.no/export-menu.png',45);
 	UKM_add_scripts_and_styles( 'UKMFsveveeksport', 'UKMfestivalen_script' );
+}
+
+function UKMFforside() {
+	$TWIG = array('ukm_hostname' => UKM_HOSTNAME );
+	require_once('controller/forside.controller.php');
+	echo TWIG('forside.twig.html', $TWIG, dirname(__FILE__), true);
 }
 
 ## INCLUDE SCRIPTS

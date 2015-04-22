@@ -1,0 +1,55 @@
+<h1>Forsideinnstillinger</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Periode</th>
+			<th>Visning</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>frem til {{ monstring.starter|dato('d. F') }}</td>
+			<td>
+				<strong>Infoside (pre mønstring)</strong>
+				<p>Enkel informasjonsvisning med stort bilde</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<h2>Visningsinnstillinger</h2>
+
+<div class="col-xs-12">
+	<form method="post">
+		<fieldset>
+			<legend>Infoside (pre mønstring)</legend>
+			
+			<div class="form-group">
+				<label>Vis deltakerinfo i menyen</label>
+				<label>
+					<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoTrue" value="true" {{ modes.pre.vis_deltakerinfo ? 'checked="checked"':'' }}>
+					ja
+				</label>
+				<label>
+					<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoFalse" value="false" {{ modes.pre.vis_deltakerinfo == false ? 'checked="checked"':'' }}>
+					nei
+				</label>
+				<p class="help-block">
+				Hvis det er opprettet en side med deltakerinfo, kan denne vises i hovedmenyen. 
+				<br />
+				<span class="text-danger">
+					OBS: siden må være tilgjengelig på 
+					<a href="http://{{ ukm_hostname }}/festivalen/deltakerinfo/" target="_blank">http://{{ ukm_hostname }}/festivalen/deltakerinfo/</a>
+				</span>
+				</p>
+			</div>
+		</fieldset>
+		
+		
+		<p class="clearfix">&nbsp;</p>
+		
+		<button type="submit" class="btn btn-md btn-success">Lagre</button>
+	</form>
+</div>
