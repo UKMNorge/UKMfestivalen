@@ -49,23 +49,73 @@
 			<legend>Infoside (pre mønstring)</legend>
 			
 			<div class="form-group">
-				<label>Vis deltakerinfo i menyen</label>
-				<label>
-					<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoTrue" value="true" {{ modes.pre.vis_deltakerinfo ? 'checked="checked"':'' }}>
-					ja
-				</label>
-				<label>
-					<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoFalse" value="false" {{ modes.pre.vis_deltakerinfo == false ? 'checked="checked"':'' }}>
-					nei
-				</label>
-				<p class="help-block">
-				Hvis det er opprettet en side med deltakerinfo, kan denne vises i hovedmenyen. 
-				<br />
-				<span class="text-danger">
-					OBS: siden må være tilgjengelig på 
-					<a href="http://{{ ukm_hostname }}/festivalen/deltakerinfo/" target="_blank">http://{{ ukm_hostname }}/festivalen/deltakerinfo/</a>
-				</span>
-				</p>
+				<div class="col-xs-12 col-sm-4">
+					<label>Vis deltakerinfo i menyen</label>
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<label>
+						<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoTrue" value="true" {{ modes.pre.vis_deltakerinfo ? 'checked="checked"':'' }}>
+						ja
+					</label>
+					<label>
+						<input type="radio" name="vis_deltakerinfo_mode_pre" id="visDeltakerInfoFalse" value="false" {{ modes.pre.vis_deltakerinfo == false ? 'checked="checked"':'' }}>
+						nei
+					</label>
+					<p class="help-block">
+						Hvis det er opprettet en side med deltakerinfo, kan denne vises i hovedmenyen. 
+						<br />
+						<span class="text-danger">
+							OBS: siden må være tilgjengelig på 
+							<a href="http://{{ ukm_hostname }}/festivalen/deltakerinfo/" target="_blank">http://{{ ukm_hostname }}/festivalen/deltakerinfo/</a>
+						</span>
+					</p>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="col-xs-12 col-sm-4">
+					<label>Vis "hva er UKM-festivalen" direkte på forsiden</label>
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<label>
+						<input type="radio" name="vis_festivalinfo_forside_mode_pre" value="true" {{ modes.pre.vis_festivalinfo_forside ? 'checked="checked"' : '' }}>
+						ja
+					</label>
+					<label>
+						<input type="radio" name="vis_festivalinfo_forside_mode_pre" value="false" {{ modes.pre.vis_festivalinfo_forside == false ? 'checked="checked"' : '' }}>
+						nei
+					</label>
+					<p class="help-block">
+						Hvis det er opprettet en festival-infoside kan denne vises under hovedmenyen på festivalsiden
+						<br/>
+						<span class="text-danger">
+							OBS: siden må være tilgjengelig på
+							<a href="http://{{ ukm_hostname }}/festivalen/om-ukm-festivalen/" target="_blank">http://{{ ukm_hostname }}/festivalen/om-ukm-festivalen/</a>
+						</span>
+					</p>
+
+				</div>
+
+				<div class="col-xs-12 col-sm-4">
+					<label>Vis "hva er UKM-festivalen" som menyvalg</label>
+				</div>
+				<div class="col-xs-12 col-sm-8">			
+					<label>
+						<input type="radio" name="vis_festivalinfo_meny_mode_pre" value="true" {{ modes.pre.vis_festivalinfo_meny ? 'checked="checked"' : '' }}>
+						ja
+					</label>
+					<label>
+						<input type="radio" name="vis_festivalinfo_meny_mode_pre" value="false" {{ modes.pre.vis_festivalinfo_meny == false ? 'checked="checked"' : '' }}>
+						nei
+					</label>
+					<p class="help-block">
+						Hvis det er opprettet en festival-infoside kan denne vises under hovedmenyen på festivalsiden
+						<br/>
+						<span class="text-danger">
+							OBS: siden må være tilgjengelig på
+							<a href="http://{{ ukm_hostname }}/festivalen/om-ukm-festivalen/" target="_blank">http://{{ ukm_hostname }}/festivalen/om-ukm-festivalen/</a>
+						</span>
+					</p>
 			</div>
 		</fieldset>
 		
