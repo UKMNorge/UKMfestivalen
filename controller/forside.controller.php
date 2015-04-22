@@ -15,6 +15,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 $pl = new monstring( get_option('pl_id') );
 $monstring = new stdClass();
 $monstring->starter = $pl->g('pl_start');
+$monstring->slutter = $pl->g('pl_stop');
 
 
 $TWIG['modes'] = array();
