@@ -117,6 +117,57 @@
 						</span>
 					</p>
 			</div>
+			
+			<div class="form-group">
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-4">
+						<label>Vis info om workshops på forsiden</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<label>
+							<input type="radio" name="vis_workshopsinfo_forside_mode_pre" value="true" {{ modes.pre.vis_workshopsinfo_forside ? 'checked="checked"' : '' }}>
+							ja
+						</label>
+						<label>
+							<input type="radio" name="vis_workshopsinfo_forside_mode_pre" value="false" {{ modes.pre.vis_workshopsinfo_forside ? '' : 'checked="checked"' }}>
+							nei
+						</label>
+						<p class="help-block">
+							Legger inn meget synlig infoblokk om at workshoptilbudet er klart og publisert.
+							<br />
+							<a href="edit-tags.php?taxonomy=category">Rediger kategorien "workshop"</a> for å endre ledetekst ved knappen.
+							<br/>
+							<span class="text-danger">
+								OBS: krever at kategorisiden for workshops er tilgjengelig på
+								<a href="http://{{ ukm_hostname }}/festivalen/category/workshop/" target="_blank">http://{{ ukm_hostname }}/festivalen/category/workshop/</a>
+							</span>
+						</p>
+	
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-sm-4">
+					<label>Vis workshops direkte på forsiden</label>
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<label>
+						<input type="radio" name="vis_workshops_forside_mode_pre" value="true" {{ modes.pre.vis_workshops_forside ? 'checked="checked"' : '' }}>
+						ja
+					</label>
+					<label>
+						<input type="radio" name="vis_workshops_forside_mode_pre" value="false" {{ modes.pre.vis_workshops_forside ? '' : 'checked="checked"' }}>
+						nei
+					</label>
+					<p class="help-block">
+						Viser 3 tilfeldig utvalgte workshop-innlegg, samt knapp "vis alle workshops"
+						<br />
+						<span class="text-danger">
+							OBS: krever at kategorisiden for workshops er tilgjengelig på
+							<a href="http://{{ ukm_hostname }}/festivalen/category/workshop/" target="_blank">http://{{ ukm_hostname }}/festivalen/category/workshop/</a>
+						</span>
+					</p>
+				</div>
+			</div>
 		</fieldset>
 		
 		
