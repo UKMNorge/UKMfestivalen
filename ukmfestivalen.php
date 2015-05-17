@@ -52,6 +52,11 @@ function UKMfestivalen_menu() {
 
 	UKM_add_menu_page('festivalen', 'Sveveeksport', 'Sveveeksport', 'administrator', 'UKMFsveveeksport', 'UKMFsveveeksport', 'http://ico.ukm.no/export-menu.png',45);
 	UKM_add_scripts_and_styles( 'UKMFsveveeksport', 'UKMfestivalen_script' );
+
+
+	UKM_add_menu_page('festivalen', 'Workshops', 'Workshops', 'administrator', 'UKMFworkshops', 'UKMFworkshops', 'http://ico.ukm.no/plant-menu.png',45);
+	UKM_add_scripts_and_styles( 'UKMFworkshops', 'UKMfestivalen_script' );
+
 }
 
 function UKMFforside() {
@@ -115,6 +120,9 @@ function UKMFsveveeksport() {
 	UKMfestivalen('sveveeksport');
 }
 
+function UKMFworkshops() {
+	UKMfestivalen('workshops');
+}
 
 
 
