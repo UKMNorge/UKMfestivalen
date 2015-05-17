@@ -121,6 +121,31 @@
 			<div class="form-group">
 				<div class="form-group">
 					<div class="col-xs-12 col-sm-4">
+					<label>Vis "workshops" som menyvalg</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<label>
+							<input type="radio" name="vis_workshops_meny_mode_pre" value="true" {{ modes.pre.vis_workshops_meny ? 'checked="checked"' : '' }}>
+							ja
+						</label>
+						<label>
+							<input type="radio" name="vis_workshops_meny_mode_pre" value="false" {{ modes.pre.vis_workshops_meny ? '' : 'checked="checked"' }}>
+							nei
+						</label>
+						<p class="help-block">
+							Viser workshops som eget menyvalg i toppmenyen
+							<br/>
+							<span class="text-danger">
+								OBS: krever at kategorisiden for workshops er tilgjengelig på
+								<a href="http://{{ ukm_hostname }}/festivalen/category/workshop/" target="_blank">http://{{ ukm_hostname }}/festivalen/category/workshop/</a>
+							</span>
+						</p>
+	
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-12 col-sm-4">
 						<label>Vis info om workshops på forsiden</label>
 					</div>
 					<div class="col-xs-12 col-sm-8">
