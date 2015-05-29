@@ -93,6 +93,7 @@ function UKMF_rapporter_okonomi() {
 						   `pl`.`pl_fylke`,
 						   `i`.`systemet_overnatting_spektrumdeltakere`,
 						   `i`.`overnatting_spektrumdeltakere`,
+						   `i`.`overnatting_hotelldogn`,
 						   `i`.`faktura_krav`,
 						   `i`.`faktura_trekk`,
 						   `i`.`faktura_beskrivelse`
@@ -110,8 +111,8 @@ function UKMF_rapporter_okonomi() {
 		
 		// Totalt antall deltakere og ledere
 		$spektrum_sys = (int) $r['systemet_overnatting_spektrumdeltakere'];
-		$spektrum_led = (int) $r['overnatting_spektrumdeltakere'];
-		$spektrum = $spektrum_sys > $spektrum_led ? $spektrum_sys : $spektrum_led;
+#		$spektrum_led = (int) $r['overnatting_spektrumdeltakere'];
+#		$spektrum = $spektrum_sys > $spektrum_led ? $spektrum_sys : $spektrum_led;
 		
 		// Ledermiddag
 		$middag = new SQL("SELECT * FROM `smartukm_videresending_ledere_middag`
@@ -125,30 +126,14 @@ function UKMF_rapporter_okonomi() {
 			$ledermiddag++;
 
 		// Hotell
-		$hotelldogn = 0;
-		$hotell = new SQL("SELECT * 
-						   FROM `smartukm_videresending_ledere`
-						   WHERE `pl_id_from` = '#plid'",
-						  array('plid'=>$r['pl_id'], 'season'=>$data['season']));
-		$hotell = $hotell->run();
-		$spektrum2 = $spektrum + mysql_num_rows($hotell);
-		while($h = mysql_fetch_assoc($hotell)) {
-			if($h['leder_over_fre']=='ukmnorge')
-				$hotelldogn++;
-			if($h['leder_over_lor']=='ukmnorge')
-				$hotelldogn++;
-			if($h['leder_over_son']=='ukmnorge')
-				$hotelldogn++;
-			if($h['leder_over_man']=='ukmnorge')
-				$hotelldogn++;
-		}
+		$hotelldogn = (int) $r['overnatting_hotelldogn'];
 
-		if($spektrum2 > $data['kvote']) {
-			$utover = $spektrum2 - $data['kvote'];
+		if($spektrum > $data['kvote']) {
+			$utover = $spektrum - $data['kvote'];
 			$innenfor = $data['kvote'];
 		} else {
 			$utover = 0;
-			$innenfor = $spektrum2;
+			$innenfor = $spektrum;
 		}
 
 		// KUNST
