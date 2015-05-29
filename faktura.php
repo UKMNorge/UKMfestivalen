@@ -15,147 +15,43 @@ function createExcel($outputFil, $dokumentNavn, $dataArray, $arkNavn, $creator='
 
 */
 
-function UKMF_faktura_gui() {
-	if($_GET['rapport'] == 'krav')
-		return okonomi_form();
-	if($_GET['rapport']=='okonomi')
-		return UKMF_rapporter_okonomi();
-	if($_GET['rapport']=='konstanter')
-		return UKMF_rapporter_konstanter();
-
-		
-	$nav = new nav('&Oslash;konomi UKM-Festivalen '.get_option('season'), '');
-
-
-	$cell = new navCell('Reisekrav', 
-						'invoice', 
-						'');
-	$cell->link('?page='.$_GET['page'].'&rapport=krav', 'Oppdater krav fra fylkene');
-	$nav->add($cell);
-
-	$cell = new navCell('Budsjettall', 
-						'money', 
-						'');
-	$cell->link('?page='.$_GET['page'].'&rapport=konstanter', 'Oppdater budsjettall');
-	$nav->add($cell);
-	
-	$cell = new navCell('Fakturagrunnlag', 
-						'excel', 
-						'');
-	$cell->link('?page='.$_GET['page'].'&rapport=okonomi', 'Generer fakturagrunnlag');
-	$nav->add($cell);
-
-	
-	echo $nav->run();
-}
-
 function UKMF_rapporter_konstanter() {
-	if(isset($_POST['lagre_konstanter']))
-		foreach($_POST as $key => $val)
-			if(strpos($key,'option_')!==false)
+	if(isset($_POST['lagre_konstanter'])) {
+		foreach($_POST as $key => $val) {
+			if(strpos($key,'option_')!==false) {
 				update_ukm_option(str_replace('option_','',$key), $val);
+			}
+		}
+	}
 
-	echo ''
-		.'<form action="?page='.$_GET['page'].'&rapport='.$_GET['rapport'].'" method="post">'
+	$option_keys = array('faktura_reiseandel' => 'Beregnet UKM Norges andel i reiseoppgjøret',
+						'faktura_kunstfrakt' => 'Budsjetterte utgifter kunstfrakt',
+						'faktura_deltakeravgift' => 'Beregnet deltakeravgift',
+						'kvote_ledere' => 'Lederkvote',
+						'kvote_deltakere' => 'Deltakerkvote',
+						'subsidiert_deltakeravgift' => 'Subsidiert deltakeravgift',
+						'ordinar_deltakeravgift' => 'Ordinær deltakeravgift',
+						'egenandel_reise' => 'Egenandel reise',
+						'ledermiddag_avgift' => 'Avgift ledermiddag',
+						'hotelldogn_pris' => 'Pris per døgn på hotell UKM Norge'
+					);
+	$options = array();
+	foreach( $option_keys as $key => $name ) {
+		$option = new stdClass();
+		$option->name = $name;
+		$option->key = $key;
+		$option->value = get_ukm_option( $key );
+		$options[] = $option;
+	}
+	$TWIG['options'] = $options;
 
-		.'<ul class="ukm">'
-		. '<li>'
-		.  '<img src="'.UKMN_ico('money',32,false).'" width="32" />'
-		.  '<h2>Budsjettall'
-		.   '<span class="forklaring">Konstanter som brukes til fakturaberegning.'
-		.  '<br />OBS: kvote-tallet er globalt, og vil lagres for alle steder vi beregner kvote'
-		.    '</span>'
-		.  '</h2>'
-		. '</li>'
-		
-		
-		. '<li class="kunsthenting">'		
-		.  '<div class="right">'
-
-		.   '<div class="form-field">'
-		.    '<label>Beregnet UKM Norges andel i reiseoppgj&oslash;ret</label>'
-		.    '<input type="text" name="option_faktura_reiseandel" value="'.get_ukm_option('faktura_reiseandel').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-
-		.   '<div class="form-field">'
-		.    '<label>Budsjetterte utgifter kunstfrakt</label>'
-		.    '<input type="text" name="option_faktura_kunstfrakt" value="'.get_ukm_option('faktura_kunstfrakt').'" />'
-		.   '</div>'
-		
-		.'<br clear="all" /><br clear="all" />'
-
-		.   '<div class="form-field">'
-		.    '<label>Beregnet deltakeravgift</label>'
-		.    '<input type="text" name="option_faktura_deltakeravgift" value="'.get_ukm_option('faktura_deltakeravgift').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Lederkvote <br /><span class="forklaring">OBS: brukes mange steder</span></label>'
-		.    '<input type="text" name="option_kvote_ledere" value="'.get_ukm_option('kvote_ledere').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Deltakerkvote<br /> <span class="forklaring">OBS: brukes mange steder</span></label>'
-		.    '<input type="text" name="option_kvote_deltakere" value="'.get_ukm_option('kvote_deltakere').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Subsidiert deltakeravgift <br /><span class="forklaring">OBS: brukes flere steder</span></label>'
-		.    '<input type="text" name="option_subsidiert_deltakeravgift" value="'.get_ukm_option('subsidiert_deltakeravgift').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Ordin&aelig;r deltakeravgift <br /><span class="forklaring">OBS: brukes flere steder</span></label>'
-		.    '<input type="text" name="option_ordinar_deltakeravgift" value="'.get_ukm_option('ordinar_deltakeravgift').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Egenandel reise <br /><span class="forklaring">OBS: brukes mange steder</span></label>'
-		.    '<input type="text" name="option_egenandel_reise" value="'.get_ukm_option('egenandel_reise').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>Avgift ledermiddag <br /><span class="forklaring">OBS: brukes flere steder</span></label>'
-		.    '<input type="text" name="option_ledermiddag_avgift" value="'.get_ukm_option('ledermiddag_avgift').'" />'
-		.   '</div>'
-
-		.'<br clear="all" /><br clear="all" />'
-		
-		.   '<div class="form-field">'
-		.    '<label>D&oslash;gnpris p&aring; hotell <br /><span class="forklaring">OBS: brukes flere steder</span></label>'
-		.    '<input type="text" name="option_hotelldogn_pris" value="'.get_ukm_option('hotelldogn_pris').'" />'
-		.   '</div>'
-		
-		.'</div>'		
-		.'<br clear="all" /><br clear="all" />'
-
-		.'<input type="submit" value="Lagre" name="lagre_konstanter" />'
-				
-		.'</li>'
-		.'</ul>'
-		
-		.'</form>'
-	;
+	echo TWIG('okonomi_konstanter.twig.html', $TWIG, dirname(__FILE__), true);
 }
 
 
 function UKMF_rapporter_okonomi() {
 	global $objPHPExcel;
-	UKM_loader('excel');
+	require_once('UKM/inc/excel.inc.php');
 	echo '<h2>Fakturagrunnlag UKM-Festivalen '.$data['season'].'</h2>'
 		.'<div id="loading_faktura">Vennligst vent, beregner fakturagrunnlag</div>'
 		.'<br />';
@@ -559,68 +455,14 @@ function okonomi_form() {
 	$res = $qry->run();
 	$i = 1;
 	$arkRef = array();
-	echo ''
-		.'<form action="?page='.$_GET['page'].'&rapport='.$_GET['rapport'].'" method="post">'
-		.'<ul class="ukm" id="faktura">'
-		.'<li>'
-		.  '<img src="'.UKMN_ico('money',32,false).'" width="32" />'
-		.  '<h2>Fakturakorrigeringer / grunnlag'
-		.	'<br />'
-		#.   '<span class="forklaring">OBS: Husk &aring; lagre for &aring; f&aring; med endringer i excel-arket'
-		.    '</span>'
-		.  '</h2>'
-		. '</li>'
-		. '<li class="fakturagrunnlag">'
-		.  '<div class="navn">'
-		.   'Fylke'
-		.  '</div>'
-#		.  '<div class="innenfor">'
-#		.	'Deltakere og ledere innenfor kvote'
-#		.  '</div>'
-#		.  '<div class="utover">'
-#		.	'Deltakere og ledere utover kvote'
-#		.  '</div>'
-		.  '<div class="krav">'
-		.	'Reisekrav'
-		.  '</div>'
-		.  '<div class="trekk">'
-		.	'Trekk i reisekrav'
-		.  '</div>'
-		.  '<div class="beskrivelse">'
-		.	'Begrunnelse'
-		.  '</div>'
-		.  '<br clear="all" />'
-		. '</li>'
-		;
+	
+	$TWIG = array();
+
 	while($r = mysql_fetch_assoc($res)) {
-		echo '<li class="fakturagrunnlag">'
-		.  '<div class="navn">'
-		.   utf8_encode($r['pl_name'])
-		.  '</div>'
-#		.  '<div class="innenfor">'
-#		.	'<input type="text" maxlength="2" name="f_'.$r['pl_id'].'_innenfor" value="'. $r['faktura_innenfor'] .'" />'
-#		.  '</div>'
-#		.  '<div class="utover">'
-#		.	'<input type="text" maxlength="2" name="f_'.$r['pl_id'].'_utover" value="'. $r['faktura_utover'] .'" />'
-#		.  '</div>'
-		.  '<div class="krav">'
-		.	'<input type="text" maxlength="6" name="f_'.$r['pl_id'].'_krav" value="'. $r['faktura_krav'] .'" />'
-		.  '</div>'
-		.  '<div class="trekk">'
-		.	'<input type="text" maxlength="6" name="f_'.$r['pl_id'].'_trekk" value="'. $r['faktura_trekk'] .'" />'
-		.  '</div>'
-		.  '<div class="beskrivelse">'
-		.	'<input type="text" name="f_'.$r['pl_id'].'_beskrivelse" value="'. $r['faktura_beskrivelse'] .'" />'
-		.  '</div>'
-		.  '<br clear="all" />'
-		. '</li>'
-		;
+		$TWIG['fylker'][] = $r;
 	}
-		echo '<li>'
-		. '<input type="submit" name="lagre" value="Lagre" />'
-		.'</li>'
-		.'</ul>'
-		.'</form>';
+
+	echo TWIG('okonomi_krav.twig.html', $TWIG, dirname(__FILE__), true);
 }
 function UKMV_rapporter_okonomi_save() {
 	foreach($_POST as $key => $val) {
@@ -632,6 +474,13 @@ function UKMV_rapporter_okonomi_save() {
 		$sql->add('faktura_'.$felt,$val);
 		$sql->run();
 	}
+}
+
+function get_ukm_option( $key ) {
+	return get_site_option( 'UKMpl'. get_option('pl_id') .'_'. $key );
+}
+function update_ukm_option( $key, $val ) {
+	return update_site_option( 'UKMpl'. get_option('pl_id') .'_'. $key, $val );
 }
 
 ?>

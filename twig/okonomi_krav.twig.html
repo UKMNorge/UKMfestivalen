@@ -1,0 +1,35 @@
+<form action="?page=UKMFfaktura&rapport=krav" method="post">
+	<h2>Fakturakorrigeringer / grunnlag</h2>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="col-xs-2">Fylke</th>
+				<th class="col-xs-2">Reisekrav</th>
+				<th class="col-xs-2">Trekk i reisekrav</th>
+				<th class="col-xs-6">Begrunnelse</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% for fylke in fylker %}
+			<tr>
+				<td>{{ fylke.pl_name }}</td>	
+				<td>
+					<input type="text" maxlength="6" name="f_{{ fylke.pl_id }}_krav" value="{{ fylke.faktura_krav }}" />
+				</td>
+	
+				<td>
+					<input type="text" maxlength="6" name="f_{{ fylke.pl_id }}_trekk" value="{{ fylke.faktura_trekk }}" />
+				</td>
+				
+				<td>
+					<input type="text" class="col-xs-8" name="f_{{ fylke.pl_id }}_beskrivelse" value="{{ fylke.faktura_beskrivelse }}" />
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+	<input class="btn btn-submit" type="submit" name="lagre" value="Lagre" />
+</form>

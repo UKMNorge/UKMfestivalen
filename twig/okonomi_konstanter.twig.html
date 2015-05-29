@@ -1,0 +1,21 @@
+<form action="?page=UKMFfaktura&rapport=konstanter" method="post">
+	<h2>Budsjettall</h2>
+	<p class="lead">
+		Konstanter som brukes til fakturaberegning
+		<br />
+		OBS: kvote-tallet er globalt, og vil lagres for alle steder vi beregner kvote
+	</p>	
+		
+	<table class="table table-striped">
+	{% for option in options %}
+		<tr>
+			<td>{{ option.name }}</td>
+			<td>
+				<input type="text" name="option_{{ option.key }}" value="{{ option.value }}" />
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<input class="btn btn-submit" type="submit" name="lagre_konstanter" value="Lagre" />
+
+</form>

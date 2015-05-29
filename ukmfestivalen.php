@@ -57,6 +57,9 @@ function UKMfestivalen_menu() {
 	UKM_add_menu_page('festivalen', 'Workshops', 'Workshops', 'administrator', 'UKMFworkshops', 'UKMFworkshops', 'http://ico.ukm.no/plant-menu.png',45);
 	UKM_add_scripts_and_styles( 'UKMFworkshops', 'UKMfestivalen_script' );
 
+
+	UKM_add_menu_page('festivalen', 'Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', 47);
+	UKM_add_scripts_and_styles('UKMFfaktura', 'UKMfestivalen_script');
 }
 
 function UKMFforside() {
@@ -124,7 +127,23 @@ function UKMFworkshops() {
 	UKMfestivalen('workshops');
 }
 
-
+function UKMFfaktura() {
+	require_once('faktura.php');
+	if( isset( $_GET['rapport'] ) ) {
+		switch( $_GET['rapport'] ) {
+			case 'krav':
+				return okonomi_form();
+			
+			case 'konstanter':
+				return UKMF_rapporter_konstanter();
+				
+			case 'okonomi':
+				return UKMF_rapporter_okonomi();
+		}
+	} else {
+		UKMfestivalen('okonomi_home');
+	}	
+}
 
 
 
