@@ -110,7 +110,7 @@ function UKMF_rapporter_okonomi() {
 		$data['fylke'] = utf8_encode($r['pl_name']);
 		
 		// Totalt antall deltakere og ledere
-		$spektrum_sys = (int) $r['systemet_overnatting_spektrumdeltakere'];
+		$spektrum = (int) $r['systemet_overnatting_spektrumdeltakere'];
 #		$spektrum_led = (int) $r['overnatting_spektrumdeltakere'];
 #		$spektrum = $spektrum_sys > $spektrum_led ? $spektrum_sys : $spektrum_led;
 		
