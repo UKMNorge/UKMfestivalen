@@ -30,7 +30,7 @@ while( $r = mysql_fetch_assoc( $res ) ) {
 	
 	$rad++;
 	
-	excell('A'.$rad, $leder->l_fylke);
+	excell('A'.$rad, $leder->kommer_fra);
 	excell('B'.$rad, $leder->l_navn);
 	excell('C'.$rad, $leder->l_mobilnummer);
 	excell('D'.$rad, $leder->l_epost);
