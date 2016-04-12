@@ -460,12 +460,4 @@ function UKMV_rapporter_okonomi_save() {
 		$sql->run();
 	}
 }
-
-function get_ukm_option( $key ) {
-	return get_site_option( 'UKMpl'. get_option('pl_id') .'_'. $key );
-}
-function update_ukm_option( $key, $val ) {
-	return update_site_option( 'UKMpl'. get_option('pl_id') .'_'. $key, $val );
-}
-
 ?>
