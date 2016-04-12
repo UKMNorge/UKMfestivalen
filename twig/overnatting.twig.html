@@ -1,107 +1,33 @@
 <h1>Lederovernattinger</h1>
 
-<p class="lead">Det er 2 typer reservasjoner: fylkesledere og ressurspersoner fra UKM Norge</p>
+<p class="lead">Det er 2 typer reservasjoner: fylkesledere og ressurspersoner fra UKM Norge.</p>
 
 <h3>Administrer reservasjoner</h3>
-<div class="UKMwidth">
-	<div class="col-xs-12 col-sm-6">
-		<div class="well" style="background:#fff;">
-			<h3>Fylkesledere</h3>
-			<p>Her kan du endre / supplere info fylkene har lagt inn</p>
-			
-			<label for="gotofylke">Velg fylke</label><br />
-			<select id="gotofylke">
-			{% for fylke in fylker %}
-				<option value="http:{{fylke.link}}wp-admin/admin.php?page=UKMvideresending_festival&action=ledere">{{fylke.name}}</option>
-			{% endfor %}
-			</select>
-			<a href="" target="_blank" id="gotofylkebutton" class="btn btn-primary">administrer ledere</a>
-		</div>
+<div class="col-xs-12 col-sm-6">
+	<div class="well" style="background:#fff;">
+		<h3>Fylkesledere</h3>
+		<p>Her kan du endre / supplere info fylkene har lagt inn</p>
+		
+		<label for="gotofylke">Velg fylke</label><br />
+		<select id="gotofylke">
+		{% for fylke in fylker %}
+			<option value="http:{{fylke.link}}wp-admin/admin.php?page=UKMvideresending_festival&action=ledere">{{fylke.name}}</option>
+		{% endfor %}
+		</select>
+		<a href="" target="_blank" id="gotofylkebutton" class="btn btn-primary">administrer ledere</a>
 	</div>
-	<div class="col-xs-12 col-sm-6">
-		<div class="well" style="background:#fff;">
-			<h3>UKM Norge</h3>
-			<p>Reservasjoner for UKM Norges ressurspersoner</p>
-			<p>&nbsp;</p>
+</div>
+<div class="col-xs-12 col-sm-6">
+	<div class="well" style="background:#fff;">
+		<h3>UKM Norge</h3>
+		<p>Reservasjoner for UKM Norges ressurspersoner</p>
+		<p>&nbsp;</p>
 
-			<a href="?page=UKMFovernatting&action=grupper" class="btn btn-primary">Administrer UKM Norges overnattinger</a>
-		</div>
+		<a href="?page=UKMFovernatting&action=grupper" class="btn btn-primary">Administrer UKM Norges overnattinger</a>
 	</div>
 </div>
 <div class="clearfix"></div>
 
-<h3>Status enkeltrom</h3>
-<div class="UKMwidth">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Gruppe</th>
-				{% for natt in alle_netter %}
-					<th>{{natt.timestamp|dato('d.m')}}</th>
-				{% endfor %}
-			</tr>
-		</thead>
-		<tbody>
-			{% for gruppe,netter in count.enkel if gruppe != 'total' %} 
-				<tr>
-					<td>{{gruppe|capitalize}}</td>
-					{% for natt in alle_netter %} 
-						<td>{{count.enkel[gruppe][ natt.dag~'.'~natt.mnd ]}}</td>
-					{% endfor %}
-				</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			{% for gruppe,netter in count.enkel if gruppe == 'total' %} 
-				<tr>
-					<th>{{gruppe|capitalize}}</th>
-					{% for natt in alle_netter %} 
-						<th>{{count.enkel[gruppe][ natt.dag~'.'~natt.mnd ]}}</th>
-					{% endfor %}
-				</tr>
-			{% endfor %}
-		</tfoot>
-	</table>
-</div>
-
-<h3>Status dobbeltrom</h3>
-<div class="UKMwidth">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Gruppe</th>
-				{% for natt in alle_netter %}
-					<th>{{natt.timestamp|dato('d.m')}}</th>
-				{% endfor %}
-			</tr>
-		</thead>
-		<tbody>
-			{% for gruppe,netter in count.enkel if gruppe != 'total' %} 
-				<tr>
-					<td>{{gruppe|capitalize}}</td>
-					{% for natt in alle_netter %} 
-						<td>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]|length}}</td>
-					{% endfor %}
-				</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			{% for gruppe,netter in count.enkel if gruppe == 'total' %} 
-				<tr>
-					<th>{{gruppe|capitalize}}</th>
-					{% for natt in alle_netter %} 
-						<th>{{count.dobbel[gruppe][ natt.dag~'.'~natt.mnd ]|length}}</th>
-					{% endfor %}
-				</tr>
-			{% endfor %}
-		</tfoot>
-	</table>
-</div>
-<h3>Last ned hotellister</h3>
-<p class="lead">Når alt er klart laster du her ned excel-dokumentet som sendes til hotellet for booking</p>
-<p>Du kan laste ned excel-arket så mange ganger du ønsker (for å se status underveis e.l.)</p>
-<a href="{{excel_hotell_norge}}">Last ned excel-ark for bestilling av hotell</a>
-
-<h3>Last ned Spektrum-lister</h3>
-<p class="lead">Når alt er klart laster du her ned excel-dokumentet som kan brukes til vaktene</p>
-<a href="{{excel_deltakerovernatting}}">Last ned excel-ark for deltakerovernatting</a>
+<p class="lead">
+	For oversikt, utskrift og bestilling til hotellet, velg "rapporter" i menyen
+</p>
