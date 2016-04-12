@@ -38,7 +38,7 @@ function UKMfestivalen_menu() {
 	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',41);
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', 47);
+	UKM_add_menu_page('festivalen', 'Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', 'http://ico.ukm.no/excel-menu.png', 47);
 	UKM_add_scripts_and_styles('UKMFfaktura', 'UKMfestivalen_script');
 }
 
