@@ -460,4 +460,12 @@ function UKMV_rapporter_okonomi_save() {
 		$sql->run();
 	}
 }
+
+function get_ukm_option( $key ) {
+	return get_site_option( 'UKMFvideresending_'.$key.'_'.get_option('season') );
+}
+function update_ukm_option( $key, $val ) {
+	return update_site_option( 'UKMFvideresending_'.$key.'_'.get_option('season'), $val );
+}
+
 ?>
