@@ -13,7 +13,7 @@ $TWIG['monstring'] = $monstring;
 	$dag = $start->dag;
 	$mnd = $start->mnd;
 	$ar = $start->ar;
-	for( $i=1; $i<4; $i++) {
+	for( $i=1; $i<6; $i++) {
 		$tilknytning = new stdClass();
 		
 		$dag--;
