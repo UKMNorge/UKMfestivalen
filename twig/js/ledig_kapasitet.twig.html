@@ -1,5 +1,5 @@
 {% for rom in ledige %}
 	<option value="{{rom.ID}}" {{rom.selected ? 'selected="selected"' : '' }}>{{rom.navn}} med {% for person in rom.personer.objects %}{{person.navn}} {% if loop.last == false %}, {% endif %}{% endfor %}</option>
 {% else %}
-	<option value="nytt" disabled="disabled">Det er ingen ledige dobbeltrom</option>
+	<option value="nytt" disabled="disabled">Det er ingen ledige {{ type }}rom</option>
 {% endfor %}

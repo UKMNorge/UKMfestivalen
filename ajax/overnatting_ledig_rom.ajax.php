@@ -12,13 +12,13 @@ if( $_POST['person'] == 'ny' ) {
 	$person->rom->guests();
 	$person->rom->selected=true;
 	
-	if( $person->rom->type == 'dobbelt' && $person->rom->personer->count() == $person->rom->kapasitet ) {
+	if( $person->rom->type == $_POST['romtype'] && $person->rom->personer->count() == $person->rom->kapasitet ) {
 		$ledige = array( $person->rom );
 	}
 }
 
 $rom = new rom_collection();
-$rom->load_by_available( 'dobbelt' );
+$rom->load_by_available( $_POST['romtype'] );
 if( is_array( $rom->objects ) ) {
 	foreach( $rom->objects as $current_room ) {
 		if( $selected_rom == $current_room->ID ) {
@@ -28,10 +28,13 @@ if( is_array( $rom->objects ) ) {
 		}
 		$current_room->guests();
 	}
+} else {
+	$rom->objects = array();
 }
 
 die( json_encode(	array(	'success' => true,
 							'ledige' => array_merge($ledige, $rom->objects),
+							'type' => $_POST['romtype']
 						)
 				)
 	);

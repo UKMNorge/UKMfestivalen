@@ -21,8 +21,7 @@
 	         };
 	 jQuery.post(ajaxurl, data, function(response) {
 		jQuery('#person_leggtil').html( twigJSovernattingperson_form.render( jQuery.parseJSON(response) ) );
-		jQuery(document).trigger('showHideDobbeltrom');
-	
+		jQuery(document).trigger('load_romdeling');
 	 });
 	});
 
@@ -39,7 +38,7 @@
 			ankomst: jQuery('#person_leggtil #ankomst').val(),
 			avreise: jQuery('#person_leggtil #avreise').val(),
 			romtype: jQuery('#person_leggtil input[name="romtype"]:checked').val(),
-			dobbeltromID: jQuery('#person_leggtil #dobbeltrom_med_hvem').val()
+			romID: jQuery('#person_leggtil #rom_med_hvem').val()
 		};
 		
 		jQuery.post(ajaxurl, data, function(response) {
@@ -64,37 +63,33 @@
 	
 	
 	jQuery(document).on('click focus change','#person_leggtil input[name="romtype"]', function(){
-		jQuery(document).trigger('showHideDobbeltrom');
+		jQuery(document).trigger('load_romdeling');
 	});
-	
-	jQuery(document).on('showHideDobbeltrom', function(){
-		if( jQuery('#person_leggtil input[name="romtype"]:checked').val() == 'dobbel' ) {
-			jQuery(document).trigger('dobbeltrom_vis');
-			jQuery(document).trigger('dobbeltrom_last_ledig_kapasitet');
-		} else {
-			jQuery(document).trigger('dobbeltrom_skjul');
-		}
 
-	});
+	jQuery(document).on('load_romdeling', function() {
+		var romtype = jQuery('#person_leggtil input[name="romtype"]:checked').val();
+		
+		if( romtype == 'enkelt' ) {
+			jQuery('#rom_deling').slideUp();
+		} else {
+			jQuery('#rom_deling').slideDown();
+			jQuery(document).trigger('rom_last_ledig_kapasitet');
+		}
+	});	
 	
-	jQuery(document).on('dobbeltrom_vis', function(){
-		jQuery('#dobbeltrom_deling').slideDown();
-	});
-	jQuery(document).on('dobbeltrom_skjul', function(){
-		jQuery('#dobbeltrom_deling').slideUp();
-	});
-	jQuery(document).on('dobbeltrom_last_ledig_kapasitet', function(){
+	jQuery(document).on('rom_last_ledig_kapasitet', function(){
 		var data = {
 			action: 'UKMfestivalen_ajax',
-			subaction: 'overnatting_ledig_dobbeltrom',
-			person: jQuery('#person_leggtil #person').val()
+			subaction: 'overnatting_ledig_rom',
+			person: jQuery('#person_leggtil #person').val(),
+			romtype: jQuery('#person_leggtil input[name="romtype"]:checked').val()
 		};
 		
 		jQuery.post(ajaxurl, data, function(response) {
 			var data = jQuery.parseJSON( response );
 			
 			if( data.success ) {
-				jQuery('#dobbeltrom_med_hvem optgroup').html( twigJSledigkapasitet.render( data ) );
+				jQuery('#rom_med_hvem optgroup').html( twigJSledigkapasitet.render( data ) );
 			} else {
 				console.error('Kunne ikke laste inn ledig kapasitet');
 			}

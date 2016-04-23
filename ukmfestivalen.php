@@ -87,6 +87,10 @@ function UKMFworkshops() {
 	UKMfestivalen('workshops');
 }
 
+function UKMF_overnatting_getRomtyper() {
+	return array('enkelt'=>1, 'dobbelt'=>2, 'trippelt'=>3, 'kvadrupelt'=>4 );
+}
+
 function UKMFfaktura() {
 	require_once('faktura.php');
 	if( isset( $_GET['rapport'] ) ) {

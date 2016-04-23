@@ -75,32 +75,29 @@
 <div class="clearfix"></div>
 <p>&nbsp;</p>
 
-
 <div class="form-group">
 	<label>Type rom</label>
 	<br />
-	<label for="rom_enkel">
-		<input type="radio" name="romtype" id="rom_enkel" class="form-control" value="enkel" {{person.romtype == 'enkelt' ? 'checked="checked"' : '' }} />
-		Enkeltrom
+	{% for type, kapasitet in romtyper %}
+	<label for="rom_{{ type }}">
+		<input type="radio" name="romtype" id="rom_{{ type }}" class="form-control" value="{{ type }}" {{person.romtype == type ? 'checked="checked"' : '' }} />
+		{{ type|capitalize }}rom
 	</label>
-
-	<label for="rom_dobbel">
-		<input type="radio" name="romtype" id="rom_dobbel" class="form-control" value="dobbel" {{person.romtype == 'dobbelt' ? 'checked="checked"' : '' }} />
-		Dobbeltrom
-	</label>
+	{% endfor %}
 </div>
 
-
-<div class="form-group" id="dobbeltrom_deling" style="display:none">
-	<label>Velg dobbeltrom</label>
-	<br />
-	<select id="dobbeltrom_med_hvem">
-		<option value="nytt">Opprett et nytt dobbeltrom</option>
-		<optgroup label="eller sammen med">
-			<option value="false" disabled="disabled">Vennligst vent, laster dobbeltrom med ledig kapasitet...</option>
-		</optgroup>
-	</select>
-</div>
+{% for type, kapasitet in romtyper %}
+	<div class="form-group" id="rom_deling" style="display:none">
+		<label>Velg rom</label>
+		<br />
+		<select id="rom_med_hvem">
+			<option value="nytt">Opprett et nytt rom</option>
+			<optgroup label="eller sammen med">
+				<option value="false" disabled="disabled">Vennligst vent, laster rom med ledig kapasitet...</option>
+			</optgroup>
+		</select>
+	</div>
+{% endfor %}
 
 {% if person.ID == 'ny' %}
 <button type="button" class="btn btn-default submit" data-class="btn-default" data-text="Legg til person" id="person_leggtil_knapp">Legg til person</button>

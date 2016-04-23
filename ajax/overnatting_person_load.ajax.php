@@ -10,5 +10,6 @@ $person = new person_overnatting( $_POST['ID'] );
 $person->set('romtype', $person->rom->type );
 
 $TWIG['person'] = $person;
+$TWIG['romtyper'] = UKMF_overnatting_getRomtyper();
 
 die( json_encode( $TWIG ) );

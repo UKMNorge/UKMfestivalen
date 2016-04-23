@@ -20,17 +20,7 @@ if( $_POST['person'] == 'ny' ) {
 	$person->update();
 }
 
-if( $_POST['romtype'] == 'dobbel' ) {
-	if( is_numeric( $_POST['dobbeltromID'] ) ) {
-		$rom = new rom( $_POST['dobbeltromID'] );
-	} else {
-		$rom = new rom();
-		$rom->set('type', 'dobbelt');
-		$rom->set('kapasitet', 2);
-		$rom->create();
-	}
-	$relate = $rom->relate( $person );
-} else {
+if( $_POST['romtype'] == 'enkelt' ) {
 	if( isset( $person->rom ) && $person->rom->type == 'enkelt' ) { 
 	} else {
 		$rom = new rom();
@@ -39,6 +29,17 @@ if( $_POST['romtype'] == 'dobbel' ) {
 		$rom->create();
 		$relate = $rom->relate( $person );
 	}
+} else {
+	if( is_numeric( $_POST['romID'] ) ) {
+		$rom = new rom( $_POST['romID'] );
+	} else {
+		$romtyper = UKMF_overnatting_getRomtyper();
+		$rom = new rom();
+		$rom->set('type', $_POST['romtype']);
+		$rom->set('kapasitet', $romtyper[ $_POST['romtype'] ]);
+		$rom->create();
+	}
+	$relate = $rom->relate( $person );
 }
 // Last inn rom-innstillinger for personen
 $person->post_load();

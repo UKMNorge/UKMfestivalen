@@ -9,5 +9,6 @@ $TWIG['person']['ankomst'] = date('d.m', $start->timestamp);
 $TWIG['person']['avreise'] = date('d.m', $stop->timestamp);
 $TWIG['person']['ID'] = 'ny';
 $TWIG['person']['romtype'] = 'enkelt';
+$TWIG['romtyper'] = UKMF_overnatting_getRomtyper();
 
 die( json_encode( $TWIG ) );
