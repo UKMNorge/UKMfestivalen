@@ -192,8 +192,33 @@
 						</span>
 					</p>
 				</div>
+				
+				
+				
+				<div class="col-xs-12 col-sm-4">
+					<label>Vis kontaktpersoner</label>
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<label>
+						<input type="radio" name="vis_festivalinfo_kontaktpersoner" value="true" {{ modes.pre.vis_festivalinfo_kontaktpersoner ? 'checked="checked"' : '' }}>
+						ja
+					</label>
+					<label>
+						<input type="radio" name="vis_festivalinfo_kontaktpersoner" value="false" {{ modes.pre.vis_festivalinfo_kontaktpersoner ? '' : 'checked="checked"' }}>
+						nei
+					</label>
+					<p class="help-block">
+						Hvis denne er satt til "nei", vil menyvalget kontaktpersoner lenke til <a href="//om.{{UKM_HOSTNAME}}/kontakt/administrasjonen/">UKM for voksne og presse: kontakt administrasjonen</a>
+					</p>
+				</div>
+
+				
+				
+				
 			</div>
 		</fieldset>
+		
+		
 		
 		
 		<p class="clearfix">&nbsp;</p>
