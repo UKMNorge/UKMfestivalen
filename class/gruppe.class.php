@@ -10,7 +10,7 @@ class gruppe extends simple_orm {
 
 
 	public function personer() {
-		$this->personer = new personer();
+		$this->personer = new personer_overnatting();
 		$this->personer->filter("WHERE `gruppe` = '".$this->ID."'");
 		$this->personer->load();
 	}

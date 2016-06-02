@@ -68,7 +68,7 @@ class rom extends simple_orm {
 	public function guests() {
 		require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/person.collection.php');
 
-		$this->personer = new personer();
+		$this->personer = new personer_overnatting();
 		$this->personer->load_by_room( $this->ID );
 	}
 }

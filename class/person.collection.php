@@ -2,7 +2,7 @@
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/simple_collection.class.php');
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/person.class.php');
 
-class personer extends simple_collection {
+class personer_overnatting extends simple_collection {
 	var $table_name = 'ukm_festival_overnatting_person';
 	var $object_type = 'person_overnatting';
 	
