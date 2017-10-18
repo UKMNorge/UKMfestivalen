@@ -29,16 +29,16 @@ function UKMfestivalen_ajax() {
 function UKMfestivalen_menu() {
 	global $UKMN;
 
-	UKM_add_menu_page('content', 'Forsiden', 'Forsiden', 'administrator', 'UKMFforside', 'UKMFforside', 'http://ico.ukm.no/toy-blue-menu.png',0);
+	UKM_add_menu_page('content', 'Forsiden', 'Forsiden', 'administrator', 'UKMFforside', 'UKMFforside', '//ico.ukm.no/toy-blue-menu.png',0);
 	UKM_add_scripts_and_styles( 'UKMFforside', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Workshops', 'Workshops', 'administrator', 'UKMFworkshops', 'UKMFworkshops', 'http://ico.ukm.no/plant-menu.png',45);
+	UKM_add_menu_page('festivalen', 'Workshops', 'Workshops', 'administrator', 'UKMFworkshops', 'UKMFworkshops', '//ico.ukm.no/plant-menu.png',45);
 	UKM_add_scripts_and_styles( 'UKMFworkshops', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', 'http://ico.ukm.no/hotel-menu.png',41);
+	UKM_add_menu_page('festivalen', 'Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', '//ico.ukm.no/hotel-menu.png',41);
 	UKM_add_scripts_and_styles( 'UKMFovernatting', 'UKMfestivalen_script' );
 
-	UKM_add_menu_page('festivalen', 'Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', 'http://ico.ukm.no/excel-menu.png', 47);
+	UKM_add_menu_page('festivalen', 'Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', '//ico.ukm.no/excel-menu.png', 47);
 	UKM_add_scripts_and_styles('UKMFfaktura', 'UKMfestivalen_script');
 }
 

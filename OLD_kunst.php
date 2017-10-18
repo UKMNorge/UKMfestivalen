@@ -95,7 +95,7 @@ function UKMF_kunst_oversikt() {
 	echo ''
 		.'<div id="loadedBox">'
 		. '<h2>Last ned ZIP-fil</h2>'
-		. '<a href="http://ukm.no/temp/zip/'.$zipname.'">Last ned alle kunstnere og kunstverk som zip-fil</a><br />'
+		. '<a href="//ukm.no/temp/zip/'.$zipname.'">Last ned alle kunstnere og kunstverk som zip-fil</a><br />'
 		. $return
 		.'<script>jQuery("#loadBox").slideUp();jQuery("#loadedBox").show();</script>'
 		;
@@ -241,7 +241,7 @@ function UKMV_rapporter_kunsthenting() {
 		.'</div>'
 		.'<br />'
 		.'<ul class="rapport" id="kunstrapport">'
-#		.'<link rel="stylesheet" id="UKMVideresending_css-css"  href="http://ukm.no/wp-content/plugins/UKMVideresending/videresending.css?ver=3.3.1" type="text/css" media="all" />'
+#		.'<link rel="stylesheet" id="UKMVideresending_css-css"  href="//ukm.no/wp-content/plugins/UKMVideresending/videresending.css?ver=3.3.1" type="text/css" media="all" />'
 		.	'<li>'
 		.		'<h3>Oversikt henting</h3>'
 		.	'</li>'
