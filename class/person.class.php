@@ -19,4 +19,11 @@ class person_overnatting extends simple_orm {
 		$this->rom = new rom();
 		$this->rom->load_by_person( $this );
 	}
+	
+	public function delete( $pl_from )  {
+		$sqldel = new SQLdel('ukm_festival_overnatting_rel_person_rom', array('person_id'=>$this->ID));
+		$sqldel->run();
+		
+		parent::delete( $pl_from );
+	}
 }

@@ -13,7 +13,7 @@
 		jQuery(document).trigger('reset_person_leggtil');
 	});
 	
-	jQuery(document).on('click', 'tr.person a', function(e) {
+	jQuery(document).on('click', 'tr.person a.edit', function(e) {
 	 e.preventDefault();
 	 data = {action: 'UKMfestivalen_ajax',
 	         subaction: 'overnatting_person_load',
@@ -123,6 +123,18 @@
 	});	
 	jQuery(document).on('click','a.delete', function(){
 		alert('Kontakt Marius');
+	});
+	jQuery(document).on('click', '.deletePerson', function(e){
+		e.preventDefault();
+		var id = jQuery(this).parents('tr').attr('data-id');
+		var data = {
+			action: 'UKMfestivalen_ajax',
+			subaction: 'overnatting_person_delete',
+			ID: id,
+		};
+		jQuery.post(ajaxurl, data, function(response){
+			jQuery('#person_'+ id ).slideUp();
+		});
 	});
 	
 /* ADMINISTRER LEDERE FRA FYLKENE */

@@ -11,7 +11,7 @@
 		<label for="gotofylke">Velg fylke</label><br />
 		<select id="gotofylke">
 		{% for fylke in fylker %}
-			<option value="http:{{fylke.link}}wp-admin/admin.php?page=UKMvideresending_festival&action=ledere">{{fylke.name}}</option>
+			<option value="http:{{fylke.link}}wp-admin/admin.php?page=UKMVideresending&action=ledere">{{fylke.name}}</option>
 		{% endfor %}
 		</select>
 		<a href="" target="_blank" id="gotofylkebutton" class="btn btn-primary">administrer ledere</a>
