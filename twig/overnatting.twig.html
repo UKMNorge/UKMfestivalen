@@ -31,3 +31,23 @@
 <p class="lead">
 	For oversikt, utskrift og bestilling til hotellet, velg "rapporter" i menyen
 </p>
+
+<h2>Kommentarer fra fylkene</h2>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th width="150">Fylke</th>
+			<th>Kommentar</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+		{% for kommentar in kommentarer %}
+			<tr>
+				<th>{{ kommentar.fylke }}</th>
+				<td>{{ kommentar.kommentar }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

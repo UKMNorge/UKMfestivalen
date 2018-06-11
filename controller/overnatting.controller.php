@@ -20,3 +20,26 @@ require_once( 'UKM/inc/excel.inc.php');
 		$TWIG['fylker'][] = array('name' => $fylke->get('pl_name'),
 								 'link' => $fylke->get('link'));
 	}
+
+
+	$overnatting = new SQL("
+		SELECT `pl_id_from`, `overnatting_kommentar`
+		FROM `smartukm_videresending_infoskjema`
+		WHERE `pl_id` = '#pl_to'
+		",
+		['pl_to' => get_option('pl_id') ]
+	);
+	$res = $overnatting->run();
+	
+	$kommentarer = [];
+	while( $row = mysql_fetch_assoc( $res ) ) {
+		$fylke = new monstring_v2( $row['pl_id_from'] );
+		$kommentar = new stdClass();
+		$kommentar->fylke = $fylke->getFylke()->getNavn();
+		$kommentar->kommentar = stripslashes( $row['overnatting_kommentar'] );
+		$kommentarer[ $kommentar->fylke ] = $kommentar;
+	}
+	
+	ksort( $kommentarer );
+	
+	$TWIG['kommentarer'] = $kommentarer;
