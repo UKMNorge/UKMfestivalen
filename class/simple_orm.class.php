@@ -68,15 +68,17 @@ abstract class simple_orm {
 		$sql->charset('UTF-8');
 		$res = $sql->run();
 		
-		if( SQL::fetch( $res ) == 0 ) {
+		if( SQL::numRows( $res ) == 0 ) {
 			$this->trigger('post_load');
 			return false;
 		}
 		
 		$row = SQL::fetch( $res );
 		
-		foreach( $row as $key => $val ) {
-			$this->$key = utf8_encode($val);
+		if( is_array( $row ) ) {
+			foreach( $row as $key => $val ) {
+				$this->$key = $val;
+			}
 		}
 		$this->trigger('post_load');
 		return true;

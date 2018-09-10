@@ -107,7 +107,7 @@ function UKMF_rapporter_okonomi() {
 	$arkRef = array();
 	while($r = SQL::fetch($res)) {
 		$i++;
-		$data['fylke'] = utf8_encode($r['pl_name']);
+		$data['fylke'] = $r['pl_name'];
 		
 		// Totalt antall deltakere og ledere
 		$spektrum = (int) $r['systemet_overnatting_spektrumdeltakere'];
