@@ -55,7 +55,7 @@ function UKMfestivalen_script() {
 
 	wp_enqueue_script('WPbootstrap3_js');
 	wp_enqueue_style('WPbootstrap3_css');
-	wp_enqueue_script( 'UKMfestivalen_script', plugin_dir_url( _FILE_ ) .'UKMfestivalen/ukmfestivalen.js');
+	wp_enqueue_script( 'UKMfestivalen_script', plugin_dir_url(__FILE__) .'ukmfestivalen.js');
 	
 }
 
