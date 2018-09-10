@@ -14,7 +14,7 @@ class personer_overnatting extends simple_collection {
 					);
 		$res = $SQL->run();
 		$this->reset();
-		while( $r = mysql_fetch_assoc( $res ) ) {
+		while( $r = SQL::fetch( $res ) ) {
 			$this->objects[] = new $this->object_type( $r['person_id'] );
 		}
 	}

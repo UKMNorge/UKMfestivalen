@@ -21,7 +21,7 @@ class rom_collection extends simple_collection {
 					);
 		$res = $SQL->run();
 		
-		while( $r = mysql_fetch_assoc( $res ) ) {
+		while( $r = SQL::fetch( $res ) ) {
 			$this->objects[] = new $this->object_type( $r['id'] );
 		}
 	}

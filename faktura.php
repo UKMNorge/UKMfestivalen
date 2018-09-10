@@ -105,7 +105,7 @@ function UKMF_rapporter_okonomi() {
 	$res = $qry->run();
 	$i = 1;
 	$arkRef = array();
-	while($r = mysql_fetch_assoc($res)) {
+	while($r = SQL::fetch($res)) {
 		$i++;
 		$data['fylke'] = utf8_encode($r['pl_name']);
 		
@@ -443,7 +443,7 @@ function okonomi_form() {
 	
 	$TWIG = array();
 
-	while($r = mysql_fetch_assoc($res)) {
+	while($r = SQL::fetch($res)) {
 		$TWIG['fylker'][] = $r;
 	}
 

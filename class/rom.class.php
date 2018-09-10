@@ -60,7 +60,7 @@ class rom extends simple_orm {
 							 )
 					);
 		$res = $sql->run();
-		if( mysql_num_rows( $res ) == 0 )
+		if( SQL::fetch( $res ) == 0 )
 			return false;
 		return true;
 	}

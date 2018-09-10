@@ -34,7 +34,7 @@ abstract class simple_collection {
 							)
 						);
 		$ids = $ids->run();
-		while( $r = mysql_fetch_assoc( $ids ) ) {
+		while( $r = SQL::fetch( $ids ) ) {
 			$this->objects[] = new $this->object_type( $r[ $this->table_idcol ] );
 		}
 	}

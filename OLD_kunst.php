@@ -152,7 +152,7 @@ foreach($skjema as $key => $val)
 	$skjema[$key] = utf8_encode($val);
 		
 		
-while($k = mysql_fetch_assoc($kolli)) {
+while($k = SQL::fetch($kolli)) {
 	foreach($k as $key => $val) 
 		$k[$key] = utf8_encode($val);
 
@@ -257,7 +257,7 @@ function UKMV_rapporter_kunsthenting() {
 		.'</li>'
 		;
 	
-	while($r = mysql_fetch_assoc($skjema)) {
+	while($r = SQL::fetch($skjema)) {
 		$kolli = new SQL("SELECT COUNT(`skjema_id`) AS `kolli`
 						  FROM `smartukm_videresending_infoskjema_kunst_kolli`
 						  WHERE `pl_id_from` = '#from'

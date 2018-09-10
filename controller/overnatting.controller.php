@@ -8,7 +8,7 @@ require_once( 'UKM/inc/excel.inc.php');
 					   ORDER BY `name` ASC");
 	$fylker = $fylker->run();
 	
-	while($row = mysql_fetch_assoc($fylker)) {
+	while($row = SQL::fetch($fylker)) {
 		$fylke = new fylke_monstring($row['id'], get_option('season'));
 		$fylke = $fylke->monstring_get();
 	
@@ -32,7 +32,7 @@ require_once( 'UKM/inc/excel.inc.php');
 	$res = $overnatting->run();
 	
 	$kommentarer = [];
-	while( $row = mysql_fetch_assoc( $res ) ) {
+	while( $row = SQL::fetch( $res ) ) {
 		$fylke = new monstring_v2( $row['pl_id_from'] );
 		$kommentar = new stdClass();
 		$kommentar->fylke = $fylke->getFylke()->getNavn();

@@ -68,12 +68,12 @@ abstract class simple_orm {
 		$sql->charset('UTF-8');
 		$res = $sql->run();
 		
-		if( mysql_num_rows( $res ) == 0 ) {
+		if( SQL::fetch( $res ) == 0 ) {
 			$this->trigger('post_load');
 			return false;
 		}
 		
-		$row = mysql_fetch_assoc( $res );
+		$row = SQL::fetch( $res );
 		
 		foreach( $row as $key => $val ) {
 			$this->$key = utf8_encode($val);
