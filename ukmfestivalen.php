@@ -8,6 +8,11 @@ Version: 1.0
 Author URI: http://www.ukm-norge.no
 */
 
+// I juni og juli videresender vi alle
+// nye besøkende til festivalsiden
+if( in_array( (int)date('m'), [6,7]) ) {
+	add_action('init', 'UKMredir_festival');
+}
 
 if(is_admin()) {
 	require_once('UKM/inc/twig-js.inc.php');
@@ -18,6 +23,27 @@ if(is_admin()) {
 		add_action('wp_ajax_UKMfestivalen_ajax', 'UKMfestivalen_ajax');
 	}
 	define('PLUGIN_DIR_PATH_UKMFESTIVALEN', dirname(__FILE__).'/');
+}
+
+function UKMredir_festival() {
+	if($_SERVER['REMOTE_ADDR']=='81.0.146.162')
+		return;
+	if(function_exists('is_admin') && is_admin())
+		return;
+	if ( !session_id() )
+		@session_start();
+
+	if($_SERVER['REQUEST_URI']!=='/')
+		return;
+
+	global $blog_id;
+
+
+	if($blog_id == 1 && !isset($_SESSION['UKM_forward_to_festivalen'])) {
+		$_SESSION['UKM_forward_to_festivalen'] = true;
+		header("Location: http://ukm.no/festivalen/");
+		exit();
+	}
 }
 
 function UKMfestivalen_ajax() {
