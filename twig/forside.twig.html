@@ -9,7 +9,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>frem til {{ monstring.starter|dato('d. F') }} <br /><label class="label label-success">aktiv</label></td>
+			<td>frem til {{ monstring.getStart()|dato('d. F') }} <br /><label class="label label-success">aktiv</label></td>
 			<td>
 				<strong>Infoside (pre mønstring)</strong>
 				<p>Enkel informasjonsvisning med stort bilde</p>
@@ -23,14 +23,14 @@
 			</td>
 		</tr>
 		<tr>
-			<td>fra {{ monstring.starter|dato('d. F') }}</td>
+			<td>fra {{ monstring.getStart()|dato('d. F') }}</td>
 			<td>
 				<strong>Redaksjonsside</strong>
 				<p>Fokus på redaksjonelt innhold (innlegg, bilder, video)</p>
 			</td>
 		</tr>
 		<tr>
-			<td>fra {{ monstring.slutter|dato('d. F') }}</td>
+			<td>fra {{ monstring.getStop()|dato('d. F') }}</td>
 			<td>
 				<strong>Redaksjonsside</strong>
 				<p>Fokus på redaksjonelt innhold (innlegg, bilder, video)</p>
