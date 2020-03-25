@@ -1,4 +1,9 @@
 <?php
+
+use UKMNorge\Database\SQL\Query;
+use UKMNorge\Database\SQL\Delete;
+use UKMNorge\Database\SQL\Insert;
+
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/simple_orm.class.php');
 
 class rom extends simple_orm {
@@ -16,7 +21,7 @@ class rom extends simple_orm {
 		if( get_class( $person ) !== 'person_overnatting' )
 			return false;
 		
-		$sql = new SQL("SELECT `rom_id`
+		$sql = new Query("SELECT `rom_id`
 						FROM `#table`
 						WHERE `person_id` = '#person'",
 					array('table'	=> $this->table_relations,
@@ -38,10 +43,10 @@ class rom extends simple_orm {
 		}
 		
 		// Unrelate before relate
-		$sqldel = new SQLdel($this->table_relations, array('person_id'=>$person->ID));
-		$sqldel->run();
+		$delete = new Delete($this->table_relations, array('person_id'=>$person->ID));
+		$delete->run();
 		
-		$sql = new SQLins($this->table_relations);
+		$sql = new Insert($this->table_relations);
 		$sql->add('person_id', $person->ID);
 		$sql->add('rom_id', $this->ID);
 		$res = $sql->run();
@@ -50,17 +55,19 @@ class rom extends simple_orm {
 	}
 	
 	public function related( $person ) {
-		$sql = new SQL("SELECT `id`
-						FROM `#table'
-						WHERE `person_id' = '#person'
-						AND `rom_id' = '#rom'",
-						array( 'table' 	=> $this->table_relations,
-							   'person'	=> $person->ID,
-							   'rom'	=> $this->ID
-							 )
-					);
+		$sql = new Query("
+            SELECT `id`
+            FROM `#table'
+            WHERE `person_id' = '#person'
+            AND `rom_id' = '#rom'",
+            [
+                'table' 	=> $this->table_relations,
+                'person'	=> $person->ID,
+                'rom'	=> $this->ID
+            ]
+        );
 		$res = $sql->run();
-		if( SQL::fetch( $res ) == 0 )
+		if( Query::fetch( $res ) == 0 )
 			return false;
 		return true;
 	}

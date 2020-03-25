@@ -1,10 +1,15 @@
 <?php
+
+use UKMNorge\Arrangement\Arrangement;
+
+require_once('UKM/Autoloader.php');
+
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/gruppe.class.php');
 
 $gruppe = new gruppe( $_GET['id'] );
 $gruppe->personer();
 
-$m = new monstring( get_option('pl_id') );
+$m = new Arrangement( intval( get_option('pl_id') ));
 
 $TWIG['gruppe'] = $gruppe;
 

@@ -15,6 +15,10 @@ function createExcel($outputFil, $dokumentNavn, $dataArray, $arkNavn, $creator='
 
 */
 
+use UKMNorge\Database\SQL\Insert;
+use UKMNorge\Database\SQL\Query;
+use UKMNorge\Database\SQL\Update;
+
 function UKMF_rapporter_konstanter() {
 	if(isset($_POST['lagre_konstanter'])) {
 		foreach($_POST as $key => $val) {
@@ -88,7 +92,7 @@ function UKMF_rapporter_okonomi() {
 
 	####################################################################################
 	#### LOOP ALLE FYLKER, GENERER FYLKESARK
-	$qry = new SQL("SELECT `pl`.`pl_name`,
+	$qry = new Query("SELECT `pl`.`pl_name`,
 						   `pl`.`pl_id`,
 						   `pl`.`pl_fylke`,
 						   `i`.`systemet_overnatting_spektrumdeltakere`,
@@ -105,7 +109,7 @@ function UKMF_rapporter_okonomi() {
 	$res = $qry->run();
 	$i = 1;
 	$arkRef = array();
-	while($r = SQL::fetch($res)) {
+	while($r = Query::fetch($res)) {
 		$i++;
 		$data['fylke'] = $r['pl_name'];
 		
@@ -115,7 +119,7 @@ function UKMF_rapporter_okonomi() {
 #		$spektrum = $spektrum_sys > $spektrum_led ? $spektrum_sys : $spektrum_led;
 		
 		// Ledermiddag
-		$middag = new SQL("SELECT * FROM `smartukm_videresending_ledere_middag`
+		$middag = new Query("SELECT * FROM `smartukm_videresending_ledere_middag`
 						   WHERE `pl_from` = '#plid'",
 						  array('plid'=>$r['pl_id'], 'season'=>$data['season']));
 		$middag = $middag->run('array');
@@ -424,7 +428,7 @@ function expages($data) {
 function okonomi_form() {
 	if(isset($_POST['lagre']))
 		UKMV_rapporter_okonomi_save();
-	$qry = new SQL("SELECT `pl`.`pl_name`,
+	$qry = new Query("SELECT `pl`.`pl_name`,
 						   `pl`.`pl_id`,
 						   `pl`.`pl_fylke`,
 						   `i`.`systemet_overnatting_spektrumdeltakere`,
@@ -443,7 +447,7 @@ function okonomi_form() {
 	
 	$TWIG = array();
 
-	while($r = SQL::fetch($res)) {
+	while($r = Query::fetch($res)) {
 		$TWIG['fylker'][] = $r;
 	}
 
@@ -455,7 +459,7 @@ function UKMV_rapporter_okonomi_save() {
 		$pl = $info[1];
 		$felt = $info[2];
 		
-		$sql = new SQLins('smartukm_videresending_infoskjema',array('pl_id_from'=>$pl));
+		$sql = new Update('smartukm_videresending_infoskjema',array('pl_id_from'=>$pl));
 		$sql->add('faktura_'.$felt,$val);
 		$sql->run();
 	}

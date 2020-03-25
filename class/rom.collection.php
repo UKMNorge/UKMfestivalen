@@ -1,4 +1,7 @@
 <?php
+
+use UKMNorge\Database\SQL\Query;
+
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/simple_collection.class.php');
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/rom.class.php');
 require_once(PLUGIN_DIR_PATH_UKMFESTIVALEN.'class/person.class.php');
@@ -8,7 +11,7 @@ class rom_collection extends simple_collection {
 	var $object_type = 'rom';
 	
 	public function load_by_available( $type = 'dobbelt' ) {
-		$SQL = new SQL("SELECT `rom`.*
+		$SQL = new Query("SELECT `rom`.*
 						FROM `#table` AS `rom`
 						WHERE `rom`.`kapasitet` > (SELECT COUNT(`rel`.`id`) 
 													FROM `ukm_festival_overnatting_rel_person_rom` AS `rel` 
@@ -21,7 +24,7 @@ class rom_collection extends simple_collection {
 					);
 		$res = $SQL->run();
 		
-		while( $r = SQL::fetch( $res ) ) {
+		while( $r = Query::fetch( $res ) ) {
 			$this->objects[] = new $this->object_type( $r['id'] );
 		}
 	}

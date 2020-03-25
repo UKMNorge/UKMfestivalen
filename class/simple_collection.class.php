@@ -1,5 +1,7 @@
 <?php
 
+use UKMNorge\Database\SQL\Query;
+
 abstract class simple_collection {
 	var $table_name = false;
 	var $table_idcol = 'id';
@@ -25,7 +27,7 @@ abstract class simple_collection {
 	}
 	
 	function load() {
-		$ids = new SQL("SELECT `#id`
+		$ids = new Query("SELECT `#id`
 						FROM `#table`
 						".$this->filter
 						,
@@ -34,7 +36,7 @@ abstract class simple_collection {
 							)
 						);
 		$ids = $ids->run();
-		while( $r = SQL::fetch( $ids ) ) {
+		while( $r = Query::fetch( $ids ) ) {
 			$this->objects[] = new $this->object_type( $r[ $this->table_idcol ] );
 		}
 	}

@@ -1,5 +1,10 @@
 <?php
 
+use UKMNorge\Database\SQL\Delete;
+use UKMNorge\Database\SQL\Insert;
+use UKMNorge\Database\SQL\Query;
+use UKMNorge\Database\SQL\Update;
+
 abstract class simple_orm {
 	var $table_fields = array();
 	var $table_name = false;
@@ -23,14 +28,14 @@ abstract class simple_orm {
 	}
 	
 	public function update() {
-		$sql = new SQLins($this->table_name, array($this->table_idcol => $this->ID));
+		$sql = new Update($this->table_name, array($this->table_idcol => $this->ID));
 		$this->_add_sql_values( $sql );
 		$res = $sql->run();
 		return $res != -1;
 	}
 	
 	public function create( ) {
-		$sql = new SQLins( $this->table_name );
+		$sql = new Insert( $this->table_name );
 		$this->_add_sql_values( $sql );
 		$res = $sql->run();
 		
@@ -38,7 +43,7 @@ abstract class simple_orm {
 	}
 	
 	public function delete( $pl_from ) {
-		$sql = new SQLdel($this->table_name, array($this->table_idcol => $this->ID));
+		$sql = new Delete($this->table_name, array($this->table_idcol => $this->ID));
 		$res = $sql->run();
 		
 		return false;
@@ -57,7 +62,7 @@ abstract class simple_orm {
 	
 	public function _load() {
 		$this->trigger('pre_load');
-		$sql = new SQL("SELECT * 
+		$sql = new Query("SELECT * 
 						FROM `#table`
 						WHERE `#idcol` = '#ID'",
 					array(	'table' => $this->table_name,
@@ -68,12 +73,12 @@ abstract class simple_orm {
 		$sql->charset('UTF-8');
 		$res = $sql->run();
 		
-		if( SQL::numRows( $res ) == 0 ) {
+		if( Query::numRows( $res ) == 0 ) {
 			$this->trigger('post_load');
 			return false;
 		}
 		
-		$row = SQL::fetch( $res );
+		$row = Query::fetch( $res );
 		
 		if( is_array( $row ) ) {
 			foreach( $row as $key => $val ) {
