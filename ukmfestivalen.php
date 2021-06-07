@@ -11,7 +11,7 @@ Author URI: http://www.ukm-norge.no
 // I juni og juli videresender vi alle
 // nye besøkende til festivalsiden
 if( in_array( (int)date('m'), [6,7]) ) {
-	add_action('init', 'UKMredir_festival');
+	//add_action('init', 'UKMredir_festival');
 }
 
 if(is_admin()) {
