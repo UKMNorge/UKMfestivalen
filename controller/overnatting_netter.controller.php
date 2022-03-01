@@ -3,14 +3,14 @@ $monstring = new stdClass();
 $monstring->navn = $m->getNavn();
 $TWIG['monstring'] = $monstring;
 
-
-	$netter = $m->getNetter();
 	
+	$netter = $m->getNetter();
+
 	$start = $netter[0];
 
 	$tilknytning_for = array();
-	$dag = $start->dag;
-	$mnd = $start->mnd;
+	$dag = $start->format('d');
+	$mnd = $start->format('m');;
 	$ar = $start->format('Y');
 	for( $i=1; $i<6; $i++) {
 		$tilknytning = new stdClass();
@@ -39,7 +39,7 @@ $TWIG['monstring'] = $monstring;
 	
 	
 	$tilknytning_etter = array();
-	$dag = $stop->dag;
+	$dag = $stop->format('d');
 	$mnd = $stop->format('m');
 	$ar = $stop->format('Y');
 	for( $i=1; $i<4; $i++) {
@@ -60,6 +60,12 @@ $TWIG['monstring'] = $monstring;
 
 		$tilknytning_etter[$i] = $tilknytning;
 	}
+
+	// Setter timestamp til alle DateTime for å bruke dem fra TWIG js
+	foreach($netter as $natt) {
+		$natt->timestamp = $natt->getTimestamp();
+	}
+	
 $TWIG['netter']['for'] = $tilknytning_for;
 $TWIG['netter']['under']		= $netter;
 $TWIG['netter']['etter']= $tilknytning_etter;

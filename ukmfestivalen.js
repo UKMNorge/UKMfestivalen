@@ -166,3 +166,16 @@ jQuery(document).on('click', '#gotofylkebutton', function(){
 	function btn_ajax_reset( btn ) {
 		jQuery(btn).html(btn.attr('data-text')).removeClass('btn-success').addClass(btn.attr('data-class'));
 	}
+
+
+// Twig js filter
+Twig.extendFilter('dato', function(value, type) {
+	var date = new Date(1000*value);
+	if(type == 'd.m'){
+		var month = parseInt(date.getMonth()+1);
+		return date.getDate() + '.' + ( month < 10 ? 0+''+month : month);
+	}
+
+	var days = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
+	return date.getDate() + '.' + parseInt(date.getMonth()+1) + ' ' + days[date.getDay()];
+});
