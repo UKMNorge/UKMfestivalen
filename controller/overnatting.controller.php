@@ -1,31 +1,27 @@
 <?php
 
+use UKMNorge\Arrangement\Aktuelle;
 use UKMNorge\Arrangement\Arrangement;
 use UKMNorge\Database\SQL\Query;
+use UKMNorge\Geografi\Fylker;
+use UKMNorge\Nettverk\Omrade;
 
 require_once('UKM/Autoloader.php');
 
-require_once( 'UKM/inc/excel.inc.php');
+// require_once( 'UKM/inc/excel.inc.php');
 
 // LAST INN ALLE FYLKER
-	$fylker = new Query("SELECT `id`
-					   FROM `smartukm_fylke`
-					   ORDER BY `name` ASC");
-	$fylker = $fylker->run();
-	
-	while($row = Query::fetch($fylker)) {
-		$fylke = new fylke_monstring($row['id'], get_option('season'));
-		$fylke = $fylke->monstring_get();
-	
-		if(!$fylke)	
-			continue;
-		if(!is_numeric($fylke->g('pl_id')) || $fylke->g('pl_id')==0)
-			continue;
-	
-		$TWIG['fylker'][] = array('name' => $fylke->get('pl_name'),
-								 'link' => $fylke->get('link'));
-	}
+	$ukmFestivalArrangement = new Arrangement( get_option( 'pl_id' ) );
 
+	foreach($ukmFestivalArrangement->getVideresending()->getAvsendere() as $arrangAvsender) {
+		$arrangement = $arrangAvsender->getArrangement();
+		$fylke = $arrangement->getFylke();
+
+		$TWIG['fylker'][] = array('fylkeName' => $fylke->getNavn(), 
+								  'arrangementName' => $arrangement->getNavn(),
+								  'festivalId' => $ukmFestivalArrangement->getId(),
+								  'link' => $arrangement->getLink());
+	}
 
 	$overnatting = new Query("
 		SELECT `pl_id_from`, `overnatting_kommentar`
