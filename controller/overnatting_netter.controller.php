@@ -1,18 +1,17 @@
 <?php
 $monstring = new stdClass();
-$monstring->navn = $m->g('pl_name');
+$monstring->navn = $m->getNavn();
 $TWIG['monstring'] = $monstring;
 
 
-	$netter = $m->netter();
+	$netter = $m->getNetter();
 	
 	$start = $netter[0];
-	
-	
+
 	$tilknytning_for = array();
 	$dag = $start->dag;
 	$mnd = $start->mnd;
-	$ar = $start->ar;
+	$ar = $start->format('Y');
 	for( $i=1; $i<6; $i++) {
 		$tilknytning = new stdClass();
 		
@@ -24,7 +23,7 @@ $TWIG['monstring'] = $monstring;
 				$mnd = 12;
 				$ar--;
 			}
-			
+
 			$dag = cal_days_in_month( CAL_GREGORIAN, $mnd, $ar );
 		}
 		$tilknytning->dag = $dag;
@@ -41,8 +40,8 @@ $TWIG['monstring'] = $monstring;
 	
 	$tilknytning_etter = array();
 	$dag = $stop->dag;
-	$mnd = $stop->mnd;
-	$ar = $stop->ar;
+	$mnd = $stop->format('m');
+	$ar = $stop->format('Y');
 	for( $i=1; $i<4; $i++) {
 		$tilknytning = new stdClass();
 		$dag++;
