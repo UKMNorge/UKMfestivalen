@@ -317,11 +317,11 @@ function UKMF_rapporter_okonomi() {
 	$filnavn = date('dmyHis').'_UKM-Festivalen_'.$data['season'].'_Fakturagrunnlag.xlsx';
 	$objPHPExcel->setActiveSheetIndex(0);
 	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-	$objWriter->save(UKM_HOME.'../temp/phpexcel/'.$filnavn);
+	$objWriter->save(DOWNLOAD_PATH_EXCEL . $filnavn);
 	
 	####################################################################################
 	#### PRINT GUI
-	echo '<div id="loaded_faktura" style="display:none;"><a href="//ukm.no/temp/phpexcel/'.$filnavn.'">'
+	echo '<div id="loaded_faktura" style="display:none;"><a href="//download.' . UKM_HOSTNAME . '/excel/'  . $filnavn.'">'
 		.'Last ned excelark med fakturagrunnlag'
 		.'</a></div>'
 		.'<script language="javascript" type="text/javascript">'
