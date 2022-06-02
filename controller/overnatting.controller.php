@@ -27,25 +27,24 @@ require_once('UKM/Autoloader.php');
 								  'festivalId' => $ukmFestivalArrangement->getId(),
 								  'link' => $arrangement->getLink());
 	}
-
-	$overnatting = new Query("
-		SELECT `pl_id_from`, `overnatting_kommentar`
-		FROM `smartukm_videresending_infoskjema`
-		WHERE `pl_id` = '#pl_to'
-		",
-		['pl_to' => get_option('pl_id') ]
-	);
-	$res = $overnatting->run();
 	
 	$kommentarer = [];
-	while( $row = Query::fetch( $res ) ) {
-		$fylke = new Arrangement( intval( $row['pl_id_from'] ));
-		$kommentar = new stdClass();
-		$kommentar->fylke = $fylke->getFylke()->getNavn();
-		$kommentar->kommentar = stripslashes( $row['overnatting_kommentar'] );
-		$kommentarer[ $kommentar->fylke ] = $kommentar;
+	$arrangementer = [];
+	$fylker = [];
+
+	foreach(Fylker::getAll() as $fylke) {
+		$fylker[$fylke->getId()] = $fylke;
 	}
 	
-	ksort( $kommentarer );
+	$til = new Arrangement(get_option('pl_id'));	
 	
+	foreach($til->getVideresending()->getAvsendere() as $avsender) {
+		$fra = $avsender->getArrangement();
+		$arrangementer[$fra->getId()] = $fra;
+		$kommentarer[$fra->getFylke()->getId()][$fra->getId()] = $fra->getMetaValue('kommentar_overnatting_til_' . $til->getId());
+	}
+
+
 	$TWIG['kommentarer'] = $kommentarer;
+	$TWIG['arrangementer'] = $arrangementer;
+	$TWIG['alle_fylker'] = $fylker;

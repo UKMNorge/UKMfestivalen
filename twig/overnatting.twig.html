@@ -41,16 +41,20 @@
 	<thead>
 		<tr>
 			<th width="150">Fylke</th>
+			<th>Arrangement</th>
 			<th>Kommentar</th>
 		</tr>
 	</thead>
 	<tbody>
 		
-		{% for kommentar in kommentarer %}
-			<tr>
-				<th>{{ kommentar.fylke }}</th>
-				<td>{{ kommentar.kommentar }}</td>
-			</tr>
+		{% for fylke_key, fylke_kommentarer in kommentarer %}
+			{% for arrang_key, arrang_kommentar in fylke_kommentarer %}
+				<tr>
+					<td>{{ alle_fylker[fylke_key].getNavn() }}</td>
+					<td>{{ arrangementer[arrang_key].getNavn() }}</td>
+					<td><b>{{ arrang_kommentar }}</b></td>
+				</tr>
+			{% endfor %}
 		{% endfor %}
 	</tbody>
 </table>
