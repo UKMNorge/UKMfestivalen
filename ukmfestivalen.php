@@ -55,10 +55,11 @@ function UKMfestivalen_ajax() {
 function UKMfestivalen_menu() {
 	global $UKMN;
 
+	
 	$page = add_menu_page('Workshops', 'Workshops', 'administrator', 'UKMFworkshops', 'UKMFworkshops', '//ico.ukm.no/plant-menu.png',45);
 	add_action( 'admin_print_styles-' . $page, 'UKMfestivalen_script' );	
-
-	$page = add_menu_page('Overnatting', 'Overnatting', 'administrator', 'UKMFovernatting', 'UKMFovernatting', '//ico.ukm.no/hotel-menu.png',41);
+	
+	$page = add_menu_page('Overnatting', 'Overnatting', 'editor', 'UKMFovernatting', 'UKMFovernatting', '//ico.ukm.no/hotel-menu.png',41);
 	add_action( 'admin_print_styles-' . $page, 'UKMfestivalen_script' );
 
 	$page = add_menu_page('Økonomi', 'Økonomi', 'administrator', 'UKMFfaktura', 'UKMFfaktura', '//ico.ukm.no/excel-menu.png', 47);

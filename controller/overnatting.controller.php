@@ -11,6 +11,11 @@ require_once('UKM/Autoloader.php');
 // require_once( 'UKM/inc/excel.inc.php');
 
 // LAST INN ALLE FYLKER
+	$TWIG['user_editor_role'] = false;
+	if(wp_get_current_user()->roles[0] == 'editor') {
+		$TWIG['user_editor_role'] = true;
+	}
+
 	$ukmFestivalArrangement = new Arrangement( get_option( 'pl_id' ) );
 
 	foreach($ukmFestivalArrangement->getVideresending()->getAvsendere() as $arrangAvsender) {

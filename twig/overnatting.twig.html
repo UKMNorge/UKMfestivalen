@@ -3,6 +3,7 @@
 <p class="lead">Det er 2 typer reservasjoner: fylkesledere og ressurspersoner fra UKM Norge.</p>
 
 <h3>Administrer reservasjoner</h3>
+{% if user_editor_role == false %}
 <div class="col-xs-12 col-sm-6">
 	<div class="well" style="background:#fff;">
 		<h3>Fylkesledere</h3>
@@ -17,6 +18,8 @@
 		<a href="" target="_blank" id="gotofylkebutton" class="btn btn-primary">administrer ledere</a>
 	</div>
 </div>
+{% endif %}
+
 <div class="col-xs-12 col-sm-6">
 	<div class="well" style="background:#fff;">
 		<h3>UKM Norge</h3>
