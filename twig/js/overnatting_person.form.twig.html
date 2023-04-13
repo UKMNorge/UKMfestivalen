@@ -28,7 +28,7 @@
 	<select id="ankomst" name="ankomst">
 		<optgroup label="Tilknytningsdøgn i forkant">
 		{% for natt in netter.for|reverse %}
-			<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning -{{loop.revindex}})</option>
+			<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}}</option>
 		{% endfor %}
 		</optgroup>
 		<optgroup label="{{monstring.navn}}">
@@ -41,7 +41,7 @@
 		</optgroup>
 		<optgroup label="Tilknytningsdøgn i etterkant">
 			{% for natt in netter.etter %}
-				<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning +{{loop.index}})</option>
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.ankomst == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}}</option>
 			{% endfor %}
 		</optgroup>
 	</select>
@@ -53,7 +53,7 @@
 	<select id="avreise" name="avreise">
 		<optgroup label="Tilknytningsdøgn i forkant">
 		{% for natt in netter.for|reverse %}
-			<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning -{{loop.revindex}})</option>
+			<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}}</option>
 		{% endfor %}
 		</optgroup>
 		<optgroup label="{{monstring.navn}}">
@@ -66,7 +66,7 @@
 		</optgroup>
 		<optgroup label="Tilknytningsdøgn i etterkant">
 			{% for natt in netter.etter %}
-				<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}} (tilknytning +{{loop.index}})</option>
+				<option value="{{natt.timestamp|dato('d.m')}}" {{person.avreise == natt.timestamp|dato('d.m') ? 'selected="selected"' : ''}}>{{natt.timestamp|dato('j.n l')}}</option>
 			{% endfor %}
 		</optgroup>
 	</select>
