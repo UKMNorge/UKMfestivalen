@@ -19,3 +19,9 @@ OBS: Husk å bytte sessong 2022 med nåværende år.<br><br>
 4. Velg `ukm.no/festivalen`<br>
 5. Velg `Innstillinger`<br>
 6. Skriv ny festival id fra <b>steg 1</b> i feltet som heter `Pl Id`<br>
+
+
+## Workshop på UKM-festivalen
+Det brukes innlegg (nyheter) for å representere workshop.
+Legg til tilpassede felter for å definere det riktig:
+![Skjermbilde 2023-04-27 kl  12 05 09](https://user-images.githubusercontent.com/10181004/234834593-de175933-28bc-4bc0-8a9c-6b8f34a99eff.png)
