@@ -25,3 +25,5 @@ OBS: Husk å bytte sessong 2022 med nåværende år.<br><br>
 Det brukes innlegg (nyheter) for å representere workshop.
 Legg til tilpassede felter for å definere det riktig:
 ![Skjermbilde 2023-04-27 kl  12 05 09](https://user-images.githubusercontent.com/10181004/234834593-de175933-28bc-4bc0-8a9c-6b8f34a99eff.png)
+
+Det brukes kategorier for å koble innlegg (workshop) mot hendelse.
