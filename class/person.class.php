@@ -18,6 +18,18 @@ class person_overnatting extends simple_orm {
 	var $table_idcol = 'id';
 	
 	public function post_load() {
+		$dateFormat = 'd.m';
+		$ankomstDate = DateTime::createFromFormat($dateFormat, $this->ankomst);
+		$avreiseDate = DateTime::createFromFormat($dateFormat, $this->avreise);
+
+		if ($ankomstDate && $avreiseDate) {
+			$this->antallOvernattinger = $avreiseDate->diff($ankomstDate)->days + 1;
+		} else {
+			// Handle invalid date format
+			$this->antallOvernattinger = '-';
+		}
+		
+
 		$this->rom = new rom();
 		$this->rom->load_by_person( $this );
 	}
