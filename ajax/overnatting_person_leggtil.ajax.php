@@ -8,7 +8,8 @@ if( $_POST['person'] == 'ny' ) {
 	$person = new person_overnatting( $_POST['person'] );
 }
 $person->set('navn', $_POST['navn']);
-$person->set('mobil', $_POST['mobil']);
+$mobil = str_replace(' ', '', $_POST['mobil']); // Fjerner spaces
+$person->set('mobil', $mobil);
 $person->set('epost', $_POST['epost']);
 $person->set('gruppe', $_POST['gruppe']);
 $person->set('ankomst', $_POST['ankomst']);
