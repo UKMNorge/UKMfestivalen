@@ -2,7 +2,10 @@
 	<td><a href="#" class="edit"><img src="//ico.ukm.no/pencil-32.png" width="16" /></a></td>
 	<td><a href="#" class="edit">{{person.navn}}</a></td>
 	<td>{{person.mobil}}</td>
-	<td>{{person.ankomst}} - {{person.avreise}}</td>
+	
+	{% set avreise_date = (person.avreise ~ '.' ~ 'now'|date('Y'))|date('d.m.Y') %}
+	<td>{{person.ankomst}} - {{avreise_date|date_modify('+1 day')|date('d.m')}}</td>
+	
 	<td>{{ person.antallOvernattinger }}</td>
 	<td>{{person.rom.navn}}</td>
 	<td><a href="#" class="deletePerson"><img src="//ico.ukm.no/trash-32.png" width="16"  /></a></td>
