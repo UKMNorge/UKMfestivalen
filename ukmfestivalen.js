@@ -89,6 +89,13 @@
 			var data = jQuery.parseJSON( response );
 			
 			if( data.success ) {
+				var romData = [];
+				for(var rom of data.ledige) {
+					if( rom.personer.objects != null) {
+						romData.push(rom);
+					}
+				}
+				data.ledige = romData;
 				jQuery('#rom_med_hvem optgroup').html( twigJSledigkapasitet.render( data ) );
 			} else {
 				console.error('Kunne ikke laste inn ledig kapasitet');
