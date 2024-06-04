@@ -12,7 +12,7 @@ $TWIG['monstring'] = $monstring;
 	$dag = $start->format('d');
 	$mnd = $start->format('m');;
 	$ar = $start->format('Y');
-	for( $i=1; $i<6; $i++) {
+	for( $i=1; $i<15; $i++) {
 		$tilknytning = new stdClass();
 		
 		$dag--;
@@ -42,7 +42,7 @@ $TWIG['monstring'] = $monstring;
 	$dag = $stop->format('d');
 	$mnd = $stop->format('m');
 	$ar = $stop->format('Y');
-	for( $i=1; $i<4; $i++) {
+	for( $i=1; $i<10; $i++) {
 		$tilknytning = new stdClass();
 		$dag++;
 		if( $dag > cal_days_in_month( CAL_GREGORIAN, $mnd, $ar ) ) {
