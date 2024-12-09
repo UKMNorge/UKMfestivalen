@@ -21,4 +21,20 @@ class personer_overnatting extends simple_collection {
 			$this->objects[] = new $this->object_type( $r['person_id'] );
 		}
 	}
+
+	public static function load_by_group($groupId) {
+		$SQL = new Query("SELECT *
+					FROM ukm_festival_overnatting_person
+					WHERE gruppe='#gruppe'",
+					array('gruppe' => $groupId)
+		);
+		$res = $SQL->run();
+
+		$personer = [];
+		while( $r = Query::fetch( $res ) ) {
+			$personer[] = new person_overnatting( $r["id"] );
+		}
+
+		return $personer;
+	}
 }

@@ -128,8 +128,19 @@
 	
 		});
 	});	
-	jQuery(document).on('click','a.delete', function(){
-		alert('Kontakt Marius');
+	jQuery(document).on('click','a.delete', function(e){
+		e.preventDefault();
+		if (confirm('Er du sikker på at du vil slette denne gruppen? Alle personer i gruppen slettes også!')) {
+			var id = jQuery(this).parents('tr').attr('data-id');
+			var data = {
+				action: 'UKMfestivalen_ajax',
+				subaction: 'overnatting_gruppe_delete',
+				ID: id,
+			};
+			jQuery.post(ajaxurl, data, function(response){
+				jQuery('#gruppe_'+ id ).slideUp();
+			});
+		}
 	});
 	jQuery(document).on('click', '.deletePerson', function(e){
 		e.preventDefault();
